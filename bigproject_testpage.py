@@ -120,6 +120,7 @@ def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
 def pred(group_name, region_name, gender_name, age_name):
 #     df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
     df = Lone_Person_Dataset
+    st.text(df.loc[0, '연령대'].type)
 
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
 #     df['연령대'] = int(df['연령대'])

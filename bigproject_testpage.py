@@ -10,10 +10,10 @@ import plotly.express as px
 import datetime
 
 Emotion_Stat_Dataset = pd.read_excel('./Data/Emotion_Data/Emotion_Stat_Dataset.xlsx')
-IoT_Stat_Dataset = pd.read_excel('./IoT_Data/IoT_Stat_Dataset.xlsx')
+IoT_Stat_Dataset = pd.read_excel('./Data/IoT_Data/IoT_Stat_Dataset.xlsx')
 IoT_Stat_Dataset['등록일시'] = IoT_Stat_Dataset['등록일시'].dt.strftime('%Y-%m-%d %H:%M:%S')
-Person_Dataset = pd.read_excel('./Person_Data/Person_Dataset.xlsx')
-Info_Change_Reason_Dataset = pd.read_excel('./Person_Data/Info_Change_Reason_Dataset.xlsx')
+Person_Dataset = pd.read_excel('./Data/Person_Data/Person_Dataset.xlsx')
+Info_Change_Reason_Dataset = pd.read_excel('./Data/Person_Data/Info_Change_Reason_Dataset.xlsx')
 
 ########################### ARIMA 모델 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
@@ -112,7 +112,7 @@ def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
     
 ########################### 예측값 출력 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def pred(group_name, region_name, gender_name, age_name):
-    df = pd.read_csv('./Lone_Person_Data/group_n.csv')
+    df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
 
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
     df['연령대'] = df['연령대'].astype(float)
@@ -178,7 +178,7 @@ def pred(group_name, region_name, gender_name, age_name):
     
 ########################### 파이차트(현재) 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def piechart(region, gender, age):
-    df = pd.read_csv('./Lone_Person_Data/group_n.csv')
+    df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
 
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
     df['연령대'] = df['연령대'].astype(float)
@@ -243,7 +243,7 @@ def piechart(region, gender, age):
 
 ########################### 파이차트(미래) 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def piechart_pred(region, gender, age):
-    df = pd.read_csv('./Lone_Person_Data/group_n.csv')
+    df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
 
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
     df['연령대'] = df['연령대'].astype(float)
@@ -493,20 +493,20 @@ with tab2: # 감정분석 통계
     
     if Last_Week_Negative_Count < 100 and Last_Week_Negative_Count != '정상(안정)':
         Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab2_selectbox].index, 'Emotion_Type'] = '정상(안정)'
-        Person_Dataset.to_excel('./Person_Data/Person_Dataset.xlsx', index=False)
-        Person_Dataset = pd.read_excel('./Person_Data/Person_Dataset.xlsx')
+        Person_Dataset.to_excel('./Data/Person_Data/Person_Dataset.xlsx', index=False)
+        Person_Dataset = pd.read_excel('./Data/Person_Data/Person_Dataset.xlsx')
     elif Last_Week_Negative_Count >= 100 and Last_Week_Negative_Count < 130 and Last_Week_Negative_Count != '주의 필요':
         Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab2_selectbox].index, 'Emotion_Type'] = '주의 필요'
-        Person_Dataset.to_excel('./Person_Data/Person_Dataset.xlsx', index=False)
-        Person_Dataset = pd.read_excel('./Person_Data/Person_Dataset.xlsx')
+        Person_Dataset.to_excel('./Data/Person_Data/Person_Dataset.xlsx', index=False)
+        Person_Dataset = pd.read_excel('./Data/Person_Data/Person_Dataset.xlsx')
     elif Last_Week_Negative_Count >= 130 and Last_Week_Negative_Count < 150 and Last_Week_Negative_Count != '심리 상담 필요':
         Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab2_selectbox].index, 'Emotion_Type'] = '심리 상담 필요'
-        Person_Dataset.to_excel('./Person_Data/Person_Dataset.xlsx', index=False)
-        Person_Dataset = pd.read_excel('./Person_Data/Person_Dataset.xlsx')
+        Person_Dataset.to_excel('./Data/Person_Data/Person_Dataset.xlsx', index=False)
+        Person_Dataset = pd.read_excel('./Data/Person_Data/Person_Dataset.xlsx')
     elif Last_Week_Negative_Count >= 150 and Last_Week_Negative_Count != '즉시 조치 필요':
         Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab2_selectbox].index, 'Emotion_Type'] = '즉시 조치 필요'
-        Person_Dataset.to_excel('./Person_Data/Person_Dataset.xlsx', index=False)
-        Person_Dataset = pd.read_excel('./Person_Data/Person_Dataset.xlsx')
+        Person_Dataset.to_excel('./Data/Person_Data/Person_Dataset.xlsx', index=False)
+        Person_Dataset = pd.read_excel('./Data/Person_Data/Person_Dataset.xlsx')
     
     Target_Negative_Count, Target_Negative_Count_Text = 999, '본 메시지가 보일 시 오류 발생한 것입니다.'
     if t2_Target_Type == '정상(안정)':
@@ -661,11 +661,11 @@ with tab4: # 대상자 정보 및 수정
         Person_Dataset.loc[tab4_Dataset_Index] = [t4_Name, t4_Serial_Num, t4_Emotion_Type, t4_IoT_Type, t4_Phone_Num, t4_Home_Address, t4_AutoSet_Control]
         Info_Change_Reason_Dict = {'Time' : datetime.datetime.now(), 'Changed_Person' : '관리자', 'Name' : t4_Name, 'Changed_Reason': t4_Change_Reason,'IoT_Serial_Num' : t4_Serial_Num,
                                   'Non_AutoSet': t4_AutoSet_Control, 'Emotion_Type': t4_Emotion_Type, 'IoT_Type' : t4_IoT_Type, 'Phone_Num': t4_Phone_Num, 'Home_Address': t4_Home_Address}
-        Person_Dataset.to_excel('./Person_Data/Person_Dataset.xlsx', index=False)
-        Person_Dataset = pd.read_excel('./Person_Data/Person_Dataset.xlsx')
+        Person_Dataset.to_excel('./Data/Person_Data/Person_Dataset.xlsx', index=False)
+        Person_Dataset = pd.read_excel('./Data/Person_Data/Person_Dataset.xlsx')
         Info_Change_Reason_Dataset.loc[len(Info_Change_Reason_Dataset)] = Info_Change_Reason_Dict
-        Info_Change_Reason_Dataset.to_excel('./Person_Data/Info_Change_Reason_Dataset.xlsx', index=False)
-        Info_Change_Reason_Dataset = pd.read_excel('./Person_Data/Info_Change_Reason_Dataset.xlsx')
+        Info_Change_Reason_Dataset.to_excel('./Data/Person_Data/Info_Change_Reason_Dataset.xlsx', index=False)
+        Info_Change_Reason_Dataset = pd.read_excel('./Data/Person_Data/Info_Change_Reason_Dataset.xlsx')
         t4_Change_Reason = None
         st.write('정상적으로 정보가 반영되었습니다!')
     

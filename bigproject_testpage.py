@@ -11,6 +11,7 @@ import datetime
 import zipfile
 from matplotlib import font_manager,rc
 
+# os.chdir('/Users/lgu01/Python_Personal/big_project')
 Emotion_Stat_Dataset = pd.read_excel('./Data/Emotion_Data/Emotion_Stat_Dataset.xlsx')
 IoT_Stat_Dataset = pd.read_excel('./Data/IoT_Data/IoT_Stat_Dataset.xlsx')
 IoT_Stat_Dataset['등록일시'] = IoT_Stat_Dataset['등록일시'].dt.strftime('%Y-%m-%d %H:%M:%S')
@@ -106,8 +107,8 @@ def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
 
     ax.set_title(str(column_name) + ' ' + group_name)
     plt.xticks(rotation=45)
-    ax.set_xlabel('날짜')
-    ax.set_ylabel('1인 가구 수')
+#     ax.set_xlabel('날짜')
+#     ax.set_ylabel('1인 가구 수')
     ax.legend()
 
     plt.tight_layout()

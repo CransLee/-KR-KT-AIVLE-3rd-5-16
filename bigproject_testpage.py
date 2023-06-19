@@ -336,7 +336,8 @@ def piechart_pred(region, gender, age):
 ########################### IoT 추가 함수 ########################################### 이강욱 작성 및 수정
 def IoT_add_set_Dataset(Temp_Dataset):
     Original_Temp_Dataset = Temp_Dataset
-    Temp_Dataset['등록일시'] = pd.to_datetime(Temp_Dataset['등록일시'], format='%Y-%m-%d').dt.date 
+#     Temp_Dataset['등록일시'] = pd.to_datetime(Temp_Dataset['등록일시'], format='%Y-%m-%d').dt.date
+    Temp_Dataset['등록일시'] = pd.to_datetime(Temp_Dataset['등록일시']).dt.date 
     Temp_Dataset = Temp_Dataset.groupby(['등록일시'], as_index=False)[['전력량1 (Wh)', '조도1 (%)']].sum()
     Temp_Dataset['전력량1 (Wh) 일 평균'] = Temp_Dataset['전력량1 (Wh)'] / 24
     Temp_Dataset['조도1 (%) 일 평균'] = Temp_Dataset['조도1 (%)'] / 24

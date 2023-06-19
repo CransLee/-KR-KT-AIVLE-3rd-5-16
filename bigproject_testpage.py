@@ -9,8 +9,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import datetime
 
-os.chdir('/Users/lgu01/Python_Personal/big_project/Data')
-Emotion_Stat_Dataset = pd.read_excel('./Emotion_Data/Emotion_Stat_Dataset.xlsx')
+Emotion_Stat_Dataset = pd.read_excel('./Data/Emotion_Data/Emotion_Stat_Dataset.xlsx')
 IoT_Stat_Dataset = pd.read_excel('./IoT_Data/IoT_Stat_Dataset.xlsx')
 IoT_Stat_Dataset['등록일시'] = IoT_Stat_Dataset['등록일시'].dt.strftime('%Y-%m-%d %H:%M:%S')
 Person_Dataset = pd.read_excel('./Person_Data/Person_Dataset.xlsx')

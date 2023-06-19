@@ -15,20 +15,18 @@ IoT_Stat_Dataset = pd.read_excel('./Data/IoT_Data/IoT_Stat_Dataset.xlsx')
 IoT_Stat_Dataset['등록일시'] = IoT_Stat_Dataset['등록일시'].dt.strftime('%Y-%m-%d %H:%M:%S')
 Person_Dataset = pd.read_excel('./Data/Person_Data/Person_Dataset.xlsx')
 Info_Change_Reason_Dataset = pd.read_excel('./Data/Person_Data/Info_Change_Reason_Dataset.xlsx')
+Lone_Person_Dataset = pd.read_csv('./Data/Lone_Person_Data/group_n.zip', compression='zip', header=0, sep=',', quotechar='"')
+Lone_Person_Dataset.loc['연령대'] = Lone_Person_Dataset['연령대'].astype('float')
 
 ########################### ARIMA 모델 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
     
-#     df = pd.read_csv('./Lone_Person_Data/group_n.csv')
-#     zipfile.ZipFile('./Data/Lone_Person_Data/group_n.zip').extract('group_n.csv')
-    df = pd.read_csv('./Data/Lone_Person_Data/group_n.zip', compression='zip', header=0, sep=',', quotechar='"')
-#     df = pd.read_csv('./Lone_Person_Data/group_n.csv')
+    df = Lone_Person_Dataset
     st.table(df.head(10))
     
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
-    df['연령대'] = df['연령대'].astype('float')
+#     df['연령대'] = df['연령대'].astype('float')
 #     df = df.astype({"연령대":"int"})
-
 #     df.loc['연령대'] = pd.to_numeric(df['연령대'])
     conditions = [
         (df['연령대'] >= 20) & (df['연령대'] < 30),
@@ -121,10 +119,10 @@ def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
 ########################### 예측값 출력 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def pred(group_name, region_name, gender_name, age_name):
 #     df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
-    df = zipfile.ZipFile('./Data/Lone_Person_Data/group_n.zip').extract('group_n.csv')
+    df = Lone_Person_Dataset
 
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
-    df['연령대'] = int(df['연령대'])
+#     df['연령대'] = int(df['연령대'])
     conditions = [
         (df['연령대'] >= 20) & (df['연령대'] < 30),
         (df['연령대'] >= 30) & (df['연령대'] < 40),
@@ -188,10 +186,10 @@ def pred(group_name, region_name, gender_name, age_name):
 ########################### 파이차트(현재) 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def piechart(region, gender, age):
 #     df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
-    df = zipfile.ZipFile('./Data/Lone_Person_Data/group_n.zip').extract('group_n.csv')
+    df = Lone_Person_Dataset
 
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
-    df['연령대'] = df['연령대'].astype(float)
+#     df['연령대'] = df['연령대'].astype(float)
     conditions = [
         (df['연령대'] >= 20) & (df['연령대'] < 30),
         (df['연령대'] >= 30) & (df['연령대'] < 40),
@@ -254,10 +252,10 @@ def piechart(region, gender, age):
 ########################### 파이차트(미래) 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def piechart_pred(region, gender, age):
 #     df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
-    df = zipfile.ZipFile('./Data/Lone_Person_Data/group_n.zip').extract('group_n.csv')
+    df = Lone_Person_Dataset
 
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
-    df['연령대'] = df['연령대'].astype(float)
+#     df['연령대'] = df['연령대'].astype(float)
     conditions = [
         (df['연령대'] >= 20) & (df['연령대'] < 30),
         (df['연령대'] >= 30) & (df['연령대'] < 40),

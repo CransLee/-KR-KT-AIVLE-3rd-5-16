@@ -23,7 +23,7 @@ def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
 #     zipfile.ZipFile('./Data/Lone_Person_Data/group_n.zip').extract('group_n.csv')
     df = pd.read_csv('./Data/Lone_Person_Data/group_n.zip', compression='zip', header=0, sep=',', quotechar='"')
 #     df = pd.read_csv('./Lone_Person_Data/group_n.csv')
-    st.table(df)
+    st.table(df.head(10))
     
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
     df['연령대'] = int(df['연령대'])

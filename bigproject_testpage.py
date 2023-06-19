@@ -17,29 +17,25 @@ Person_Dataset = pd.read_excel('./Data/Person_Data/Person_Dataset.xlsx')
 Info_Change_Reason_Dataset = pd.read_excel('./Data/Person_Data/Info_Change_Reason_Dataset.xlsx')
 Lone_Person_Dataset = pd.read_csv('./Data/Lone_Person_Data/group_n.zip', compression='zip', header=0, sep=',', quotechar='"')
 Lone_Person_Dataset.loc['연령대'] = Lone_Person_Dataset['연령대'].astype('float')
+conditions = [
+        (Lone_Person_Dataset['연령대'] >= 20) & (Lone_Person_Dataset['연령대'] < 30),
+        (Lone_Person_Dataset['연령대'] >= 30) & (Lone_Person_Datasetdf['연령대'] < 40),
+        (Lone_Person_Dataset['연령대'] >= 40) & (Lone_Person_Dataset['연령대'] < 50),
+        (Lone_Person_Dataset['연령대'] >= 50) & (Lone_Person_Dataset['연령대'] < 60),
+        (Lone_Person_Dataset['연령대'] >= 60) & (Lone_Person_Dataset['연령대'] < 70),
+        (Lone_Person_Dataset['연령대'] >= 70) & (Lone_Person_Dataset['연령대'] < 80)
+  ]
+values = ['20대', '30대', '40대', '50대', '60대', '70대']
+# 성별, 날짜 전처리
+Lone_Person_Dataset['연령대'] = np.select(conditions, values, default='80대')
 
 ########################### ARIMA 모델 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
     
     df = Lone_Person_Dataset
     st.table(df.head(10))
-    
-    # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
-#     df['연령대'] = df['연령대'].astype('float')
-#     df = df.astype({"연령대":"int"})
-#     df.loc['연령대'] = pd.to_numeric(df['연령대'])
-    conditions = [
-        (df['연령대'] >= 20) & (df['연령대'] < 30),
-        (df['연령대'] >= 30) & (df['연령대'] < 40),
-        (df['연령대'] >= 40) & (df['연령대'] < 50),
-        (df['연령대'] >= 50) & (df['연령대'] < 60),
-        (df['연령대'] >= 60) & (df['연령대'] < 70),
-        (df['연령대'] >= 70) & (df['연령대'] < 80)
-    ]
-    values = ['20대', '30대', '40대', '50대', '60대', '70대']
 
     # 성별, 날짜 전처리
-    df['연령대'] = np.select(conditions, values, default='80대')
     df['성별'] = df['성별'].replace({1: '남성', 2: '여성'})
     df['month'] = df['month'].apply(lambda x: str('-'.join(str(x).split('.'))))
     df['month'] = pd.to_datetime(df['month'])
@@ -120,22 +116,7 @@ def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
 def pred(group_name, region_name, gender_name, age_name):
 #     df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
     df = Lone_Person_Dataset
-    st.text(df.loc[0, '연령대'])
 
-    # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
-    df.loc['연령대'] = df['연령대'].astype('float')
-    conditions = [
-        (df['연령대'] >= 20) & (df['연령대'] < 30),
-        (df['연령대'] >= 30) & (df['연령대'] < 40),
-        (df['연령대'] >= 40) & (df['연령대'] < 50),
-        (df['연령대'] >= 50) & (df['연령대'] < 60),
-        (df['연령대'] >= 60) & (df['연령대'] < 70),
-        (df['연령대'] >= 70) & (df['연령대'] < 80)
-    ]
-    values = ['20대', '30대', '40대', '50대', '60대', '70대']
-
-    # 성별, 날짜 전처리
-    df['연령대'] = np.select(conditions, values, default='80대')
     df['성별'] = df['성별'].replace({1: '남성', 2: '여성'})
     df['month'] = df['month'].apply(lambda x: str('-'.join(str(x).split('.'))))
     df['month'] = pd.to_datetime(df['month'])
@@ -188,18 +169,6 @@ def pred(group_name, region_name, gender_name, age_name):
 def piechart(region, gender, age):
 #     df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
     df = Lone_Person_Dataset
-
-    # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
-#     df['연령대'] = df['연령대'].astype(float)
-    conditions = [
-        (df['연령대'] >= 20) & (df['연령대'] < 30),
-        (df['연령대'] >= 30) & (df['연령대'] < 40),
-        (df['연령대'] >= 40) & (df['연령대'] < 50),
-        (df['연령대'] >= 50) & (df['연령대'] < 60),
-        (df['연령대'] >= 60) & (df['연령대'] < 70),
-        (df['연령대'] >= 70) & (df['연령대'] < 80)
-    ]
-    values = ['20대', '30대', '40대', '50대', '60대', '70대']
 
     # 성별, 날짜 전처리
     df['연령대'] = np.select(conditions, values, default='80대')
@@ -254,18 +223,6 @@ def piechart(region, gender, age):
 def piechart_pred(region, gender, age):
 #     df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
     df = Lone_Person_Dataset
-
-    # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
-#     df['연령대'] = df['연령대'].astype(float)
-    conditions = [
-        (df['연령대'] >= 20) & (df['연령대'] < 30),
-        (df['연령대'] >= 30) & (df['연령대'] < 40),
-        (df['연령대'] >= 40) & (df['연령대'] < 50),
-        (df['연령대'] >= 50) & (df['연령대'] < 60),
-        (df['연령대'] >= 60) & (df['연령대'] < 70),
-        (df['연령대'] >= 70) & (df['연령대'] < 80)
-    ]
-    values = ['20대', '30대', '40대', '50대', '60대', '70대']
 
     # 성별, 날짜 전처리
     df['연령대'] = np.select(conditions, values, default='80대')

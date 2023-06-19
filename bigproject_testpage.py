@@ -26,7 +26,7 @@ def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
     st.table(df.head(10))
     
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
-    df['연령대'] = int(df['연령대'])
+    df['연령대'] = df['연령대'].astype('float')
 #     df = df.astype({"연령대":"int"})
 
 #     df.loc['연령대'] = pd.to_numeric(df['연령대'])

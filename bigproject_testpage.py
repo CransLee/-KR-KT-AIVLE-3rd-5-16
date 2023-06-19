@@ -23,7 +23,7 @@ def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
     df = zipfile.ZipFile('./Data/Lone_Person_Data/group_n.zip').extract('group_n.csv')
 
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
-    df['연령대'] = df['연령대'].astype(int)
+    df['연령대'] = int(df['연령대'])
     conditions = [
         (df['연령대'] >= 20) & (df['연령대'] < 30),
         (df['연령대'] >= 30) & (df['연령대'] < 40),
@@ -118,7 +118,7 @@ def pred(group_name, region_name, gender_name, age_name):
     df = zipfile.ZipFile('./Data/Lone_Person_Data/group_n.zip').extract('group_n.csv')
 
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
-    df['연령대'] = df['연령대'].astype(float)
+    df['연령대'] = int(df['연령대'])
     conditions = [
         (df['연령대'] >= 20) & (df['연령대'] < 30),
         (df['연령대'] >= 30) & (df['연령대'] < 40),

@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import datetime
 import zipfile
+from matplotlib import font_manager,rc
 
 Emotion_Stat_Dataset = pd.read_excel('./Data/Emotion_Data/Emotion_Stat_Dataset.xlsx')
 IoT_Stat_Dataset = pd.read_excel('./Data/IoT_Data/IoT_Stat_Dataset.xlsx')

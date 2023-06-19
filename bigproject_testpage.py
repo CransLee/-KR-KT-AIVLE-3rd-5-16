@@ -20,13 +20,14 @@ Info_Change_Reason_Dataset = pd.read_excel('./Data/Person_Data/Info_Change_Reaso
 def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
     
 #     df = pd.read_csv('./Lone_Person_Data/group_n.csv')
-    df = zipfile.ZipFile('./Data/Lone_Person_Data/group_n.zip').extract('group_n.csv')
-
+    zipfile.ZipFile('./Data/Lone_Person_Data/group_n.zip').extract('group_n.csv')
+    df = pd.read_csv('./Lone_Person_Data/group_n.csv')
+    
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
-#     df['연령대'] = int(df['연령대'])
+    df['연령대'] = int(df['연령대'])
 #     df = df.astype({"연령대":"int"})
     st.table(df)
-    df.loc['연령대'] = pd.to_numeric(df['연령대'])
+#     df.loc['연령대'] = pd.to_numeric(df['연령대'])
     conditions = [
         (df['연령대'] >= 20) & (df['연령대'] < 30),
         (df['연령대'] >= 30) & (df['연령대'] < 40),

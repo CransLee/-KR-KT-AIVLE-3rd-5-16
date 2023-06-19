@@ -24,7 +24,8 @@ def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
 
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
 #     df['연령대'] = int(df['연령대'])
-    df = df.astype({"연령대":"int"})
+#     df = df.astype({"연령대":"int"})
+    df['연령대'] = pd.to_numeric(df['연령대'])
     conditions = [
         (df['연령대'] >= 20) & (df['연령대'] < 30),
         (df['연령대'] >= 30) & (df['연령대'] < 40),

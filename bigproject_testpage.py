@@ -18,7 +18,8 @@ Info_Change_Reason_Dataset = pd.read_excel('./Data/Person_Data/Info_Change_Reaso
 ########################### ARIMA 모델 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
     
-    df = pd.read_csv('./Lone_Person_Data/group_n.csv')
+#     df = pd.read_csv('./Lone_Person_Data/group_n.csv')
+    df = zipfile.ZipFile('./Data/Lone_Person_Data/group_n.zip').extract('group_n.csv')
 
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
     df['연령대'] = df['연령대'].astype(float)
@@ -112,7 +113,8 @@ def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
     
 ########################### 예측값 출력 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def pred(group_name, region_name, gender_name, age_name):
-    df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
+#     df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
+    df = zipfile.ZipFile('./Data/Lone_Person_Data/group_n.zip').extract('group_n.csv')
 
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
     df['연령대'] = df['연령대'].astype(float)
@@ -178,7 +180,8 @@ def pred(group_name, region_name, gender_name, age_name):
     
 ########################### 파이차트(현재) 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def piechart(region, gender, age):
-    df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
+#     df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
+    df = zipfile.ZipFile('./Data/Lone_Person_Data/group_n.zip').extract('group_n.csv')
 
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
     df['연령대'] = df['연령대'].astype(float)
@@ -243,7 +246,8 @@ def piechart(region, gender, age):
 
 ########################### 파이차트(미래) 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def piechart_pred(region, gender, age):
-    df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
+#     df = pd.read_csv('./Data/Lone_Person_Data/group_n.csv')
+    df = zipfile.ZipFile('./Data/Lone_Person_Data/group_n.zip').extract('group_n.csv')
 
     # 20, 25=>20대 ~ 70, 75=>70대 연령대 전처리
     df['연령대'] = df['연령대'].astype(float)

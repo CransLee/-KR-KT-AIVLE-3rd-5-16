@@ -1,4 +1,4 @@
-!pip install keras
+pip install keras
 
 # 라이브러리 불러오기
 import streamlit as st

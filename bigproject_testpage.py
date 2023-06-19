@@ -90,12 +90,12 @@ def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
     plt.figure(figsize=(10, 6))
     fig, ax = plt.subplots(figsize=(10, 6))
 
-    ax.plot(df_col.index.strftime('%Y-%m-%d'), df_pivot[region_name, gender_name, age_name], marker='o', color='pink', label='실제값')
+    ax.plot(df_col.index.strftime('%Y-%m-%d'), df_pivot[region_name, gender_name, age_name], marker='o', color='pink', label='actual')
     for i in range(len(df_col.index)):
         height = df_pivot[region_name, gender_name, age_name][i]
         ax.text(df_col.index[i].strftime('%Y-%m-%d'), height + 0.25, '%.1f' % height, ha='center', va='bottom', size=10)
 
-    ax.plot(forecast.index.strftime('%Y-%m-%d'), forecast, label='예측값', marker='o', color='gray')
+    ax.plot(forecast.index.strftime('%Y-%m-%d'), forecast, label='predict', marker='o', color='gray')
     for i in range(len(forecast.index)):
         height = forecast[i]
         ax.text(forecast.index[i].strftime('%Y-%m-%d'), height + 1, '%.1f' % height, ha='center', va='bottom', size=10, color='gray')
@@ -105,10 +105,9 @@ def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
     #     height = df_pivot2[region_name, gender_name, age_name][i]
     #     ax.text(df_col2.index[i].strftime('%Y-%m-%d'), height + 0.25, '%.1f' % height, ha='center', va='bottom', size=10)
 
-    ax.set_title(str(column_name) + ' ' + group_name)
     plt.xticks(rotation=45)
-#     ax.set_xlabel('날짜')
-#     ax.set_ylabel('1인 가구 수')
+    ax.set_xlabel('Datetime')
+    ax.set_ylabel('Count')
     ax.legend()
 
     plt.tight_layout()
@@ -567,7 +566,7 @@ with tab3: # 1인가구 집단 통계
 
     t3_col2_1, _, t3_col2_2 = st.columns([0.6, 0.1, 0.3]) # 시계열차트
     with t3_col2_1:
-        st.subheader(f'**{group}에 속하는 1인가구의 수**')
+        st.subheader(f'**{group}에 속하는 {region} {age} {gender} 1인가구의 수**')
         Lone_Person_Dataset_Loader(group, region, gender, age)
     with t3_col2_2:
         st.subheader('**미래 예측값**')

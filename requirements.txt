@@ -8,3 +8,4 @@ plotly
 pandas
 openpyxl
 scikit-learn
+git+https://github.com/CransLee/-KR-KT-AIVLE-3rd-5-16/blob/d13d01ae6c2b3110be145e6e591c5fa8fa8d401d/Data/Font/NanumGothic.otf

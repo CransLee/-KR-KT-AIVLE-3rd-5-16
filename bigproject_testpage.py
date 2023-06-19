@@ -33,7 +33,6 @@ Lone_Person_Dataset['연령대'] = np.select(conditions, values, default='80대'
 def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
     
     df = Lone_Person_Dataset
-    st.table(df.head(10))
 
     # 성별, 날짜 전처리
     df['성별'] = df['성별'].replace({1: '남성', 2: '여성'})

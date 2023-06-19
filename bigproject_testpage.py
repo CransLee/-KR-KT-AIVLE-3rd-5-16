@@ -464,7 +464,8 @@ with tab1: # IoT 통계
         t1_Serial_Num_2 = Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab1_selectbox_2].index, 'IoT_Serial_Num'].reset_index(drop=True)[0]
         st.text(t1_Serial_Num_2)
         IoT_Stat_Dataset_Search_Result_3 = IoT_Stat_Dataset.loc[IoT_Stat_Dataset['시리얼'] == t1_Serial_Num_2]
-        IoT_Stat_Dataset_Search_Result_3['등록일시'] = pd.to_datetime(IoT_Stat_Dataset_Search_Result_3['등록일시'], format='%Y-%m-%d').dt.date 
+#         IoT_Stat_Dataset_Search_Result_3['등록일시'] = pd.to_datetime(IoT_Stat_Dataset_Search_Result_3['등록일시'], format='%Y-%m-%d').dt.date 
+        IoT_Stat_Dataset_Search_Result_3['등록일시'] = pd.to_datetime(IoT_Stat_Dataset_Search_Result_3['등록일시']).dt.date 
     with t1_col4_2:
         Min_Datetime, Max_Datetime = min(IoT_Stat_Dataset_Search_Result_3['등록일시']), max(IoT_Stat_Dataset_Search_Result_3['등록일시'])
         Datetime_array = st.slider('날짜 범위', value = (Min_Datetime, Max_Datetime))

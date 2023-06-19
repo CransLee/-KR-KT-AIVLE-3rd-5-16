@@ -2,7 +2,7 @@
 # 라이브러리 불러오기
 import streamlit as st
 import pandas as pd
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 import os, glob
 import numpy as np
 from statsmodels.tsa.arima.model import ARIMA

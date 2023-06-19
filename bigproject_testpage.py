@@ -89,13 +89,14 @@ def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
     # 예측 결과 시계열차트
     plt.figure(figsize=(10, 6))
     fig, ax = plt.subplots(figsize=(10, 6))
+    st.table(df_pivot.head(10))
 
-    ax.plot(df_col.index.strftime('%Y-%m-%d'), df_pivot[region_name, gender_name, age_name], marker='o', color='pink', label='actual')
+    ax.plot(df_col.index.strftime('%Y-%m-%d'), df_pivot[region_name, gender_name, age_name], marker='o', color='pink', label='실제값')
     for i in range(len(df_col.index)):
         height = df_pivot[region_name, gender_name, age_name][i]
         ax.text(df_col.index[i].strftime('%Y-%m-%d'), height + 0.25, '%.1f' % height, ha='center', va='bottom', size=10)
 
-    ax.plot(forecast.index.strftime('%Y-%m-%d'), forecast, label='predict', marker='o', color='gray')
+    ax.plot(forecast.index.strftime('%Y-%m-%d'), forecast, label='예측값', marker='o', color='gray')
     for i in range(len(forecast.index)):
         height = forecast[i]
         ax.text(forecast.index[i].strftime('%Y-%m-%d'), height + 1, '%.1f' % height, ha='center', va='bottom', size=10, color='gray')

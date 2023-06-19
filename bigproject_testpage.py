@@ -29,6 +29,8 @@ values = ['20대', '30대', '40대', '50대', '60대', '70대']
 # 성별, 날짜 전처리
 Lone_Person_Dataset['연령대'] = np.select(conditions, values, default='80대')
 
+font_name = font_manager.FontProperties(fname='./Data/Font/NanumGothic.otf').get_name()
+
 ########################### ARIMA 모델 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
     
@@ -75,7 +77,7 @@ def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
     # 한글 설정
     import matplotlib.font_manager as fm
     # 폰트 경로 설정
-    plt.rc('font', family='./Data/Font/NanumGothic.otf')
+    plt.rc('font', family=font_name)
     df_col2 = df_pivot2[region_name, gender_name, age_name].fillna(0)
     from sklearn.metrics import mean_squared_error
 
@@ -156,7 +158,7 @@ def pred(group_name, region_name, gender_name, age_name):
     # 한글 설정
     import matplotlib.font_manager as fm
     # 폰트 경로 설정
-    plt.rc('font', family='./Data/Font/NanumGothic.otf')
+    plt.rc('font', family=font_name)
     df_col2 = df_pivot2[region_name, gender_name, age_name].fillna(0)
     
     st.write(forecast)
@@ -302,7 +304,6 @@ def piechart_pred(region, gender, age):
 ########################### IoT 추가 함수 ########################################### 이강욱 작성 및 수정
 def IoT_add_set_Dataset(Temp_Dataset):
     Original_Temp_Dataset = Temp_Dataset
-#     Temp_Dataset['등록일시'] = pd.to_datetime(Temp_Dataset['등록일시'], format='%Y-%m-%d').dt.date
     Temp_Dataset['등록일시'] = pd.to_datetime(Temp_Dataset['등록일시']).dt.date 
     Temp_Dataset = Temp_Dataset.groupby(['등록일시'], as_index=False)[['전력량1 (Wh)', '조도1 (%)']].sum()
     Temp_Dataset['전력량1 (Wh) 일 평균'] = Temp_Dataset['전력량1 (Wh)'] / 24

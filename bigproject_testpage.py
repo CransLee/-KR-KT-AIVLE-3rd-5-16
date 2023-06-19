@@ -566,7 +566,8 @@ with tab3: # 1인가구 집단 통계
 
     t3_col2_1, _, t3_col2_2 = st.columns([0.6, 0.1, 0.3]) # 시계열차트
     with t3_col2_1:
-        st.subheader(f'**{group}에 속하는 {region} {age} {gender} 1인가구의 수**')
+        st.subheader(f'**{group}에 속하는**')
+        st.subheader(f'**{region} {age} {gender} 1인가구의 수**')
         Lone_Person_Dataset_Loader(group, region, gender, age)
     with t3_col2_2:
         st.subheader('**미래 예측값**')

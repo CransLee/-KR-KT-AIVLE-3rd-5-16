@@ -668,6 +668,6 @@ with tab4: # 대상자 정보 및 수정
         with t4_col5_2:
             st.text('')
             st.text('')
-            t4_button_Click = st.button('수리점검 접수 신청', key = 'tab4_고장_접수 신청'):
+            t4_button_Click = st.button('수리점검 접수 신청', key = 'tab4_고장_접수 신청')
         if t4_button_Click:
             st.success('현 대상자 '+ t4_Fix_Name + '의 ' + t4_Fix_Sensor_Num + '의 수리점검 신청이 완료되었습니다!', icon="✅")

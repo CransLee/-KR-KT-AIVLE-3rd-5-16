@@ -17,6 +17,7 @@ IoT_Stat_Dataset = pd.read_excel('./Data/IoT_Data/IoT_Stat_Dataset.xlsx')
 IoT_Stat_Dataset['등록일시'] = IoT_Stat_Dataset['등록일시'].dt.strftime('%Y-%m-%d %H:%M:%S')
 Person_Dataset = pd.read_excel('./Data/Person_Data/Person_Dataset.xlsx')
 Info_Change_Reason_Dataset = pd.read_excel('./Data/Person_Data/Info_Change_Reason_Dataset.xlsx')
+IoT_Sensor_Info_Dataset = pd.read_excel('./Data/Person_Data/IoT_Sensor_Info.xlsx')
 Lone_Person_Dataset = pd.read_csv('./Data/Lone_Person_Data/group_n.zip', compression='zip', header=0, sep=',', quotechar='"')
 Lone_Person_Dataset.loc['연령대'] = Lone_Person_Dataset['연령대'].astype('float')
 conditions = [
@@ -367,7 +368,7 @@ button_style = """
 st.set_page_config(layout="wide")
 
 st.markdown("## IoT 사회복지사 통계 포털")
-tab1, tab2, tab3, tab4 = st.tabs(["IoT 통계", "감정분석 통계", "1인가구 집단 시계열 통계", "대상자 정보 및 수정"])
+tab1, tab2, tab3, tab4 = st.tabs(["IoT 통계", "감정분석 통계", "1인가구 집단 시계열 통계", "대상자 설정 대시보드"])
 
 
 ###########################
@@ -640,5 +641,8 @@ with tab4: # 대상자 정보 및 수정
         st.write('정상적으로 정보가 반영되었습니다!')
     
     st.subheader("")
-    st.subheader('정보 변경 이력')
-    st.table(Info_Change_Reason_Dataset.loc[Info_Change_Reason_Dataset['Name'] == tab4_selectbox_1].sort_values('Time', ascending=False))
+    with st.expander("정보 변경 이력 상세보기"):
+        st.table(Info_Change_Reason_Dataset.loc[Info_Change_Reason_Dataset['Name'] == tab4_selectbox_1].sort_values('Time', ascending=False))
+    st.subheader("")
+    with st.expander("IoT 센서 상세보기 및 고장접수"):
+        st.table(IoT_Sensor_Info_Dataset.loc[Info_Change_Reason_Dataset['IoT_Serial_Num'] == Person_Dataset.loc[tab4_Dataset_Index,'IoT_Serial_Num']].sort_values('Sensor_Type', ascending=True))

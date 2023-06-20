@@ -31,7 +31,7 @@ values = ['20대', '30대', '40대', '50대', '60대', '70대']
 # 성별, 날짜 전처리
 Lone_Person_Dataset['연령대'] = np.select(conditions, values, default='80대')
 
-# font_name = font_manager.FontProperties(fname='./Data/Font/NanumGothic.otf').get_name()
+font_name = font_manager.FontProperties(fname='./Data/Font/NanumGothic.otf').get_name()
 
 ########################### ARIMA 모델 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):

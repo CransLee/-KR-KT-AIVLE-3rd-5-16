@@ -672,4 +672,4 @@ with tab4: # 대상자 정보 및 수정
             st.text('')
             st.text('')
             if st.button('수리점검 접수 신청', key = 'tab4_고장_접수 신청'):
-                t4_Success_MSG(t4_Fix_Name, t4_Fix_Sensor_Num):
+                t4_Success_MSG(t4_Fix_Name, t4_Fix_Sensor_Num)

@@ -534,7 +534,6 @@ with tab2: # 감정분석 통계
     with t2_col4_2:
         st.text('주차별 상세 차트')
         st.table(Emotion_Stat_Dataset_Search_Result_3.sort_values('Week', ascending=False).head(10))    
-    st.stop()
         
         
 ###########################

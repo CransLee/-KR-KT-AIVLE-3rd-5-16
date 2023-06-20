@@ -658,7 +658,7 @@ with tab4: # 대상자 정보 및 수정
 
         t4_col4_1, t4_col4_2 = st.columns([0.5, 0.5])
         with t4_col4_1:
-            t4_Fix_Name = st.text_input('성명', Person_Dataset.loc[tab4_Dataset_Index, 'Name'])
+            t4_Fix_Name = st.text_input('성명', Person_Dataset.loc[tab4_Dataset_Index, 'Name'], key = 'tab4_고장_이름')
         with t4_col4_2:
             t4_Fix_Sensor_Num = st.selectbox('센서 선택', Temp_IoT_Sensor_Chosen_Dataset['Sensor_Num'].unique(), key = 'tab4_고장_센서 선택')
         t4_col5_1, t4_col5_2 = st.columns([0.5, 0.5])

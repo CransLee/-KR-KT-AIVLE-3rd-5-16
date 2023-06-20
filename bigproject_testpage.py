@@ -650,6 +650,7 @@ with tab4: # 대상자 정보 및 수정
         st.table(Info_Change_Reason_Dataset.loc[Info_Change_Reason_Dataset['Name'] == tab4_selectbox_1].sort_values('Time', ascending=False).head(5))
     st.subheader("")
     with st.expander("IoT 센서 상세보기 및 고장접수"):
+        st.text(Person_Dataset.loc[tab4_Dataset_Index,'IoT_Serial_Num'])
         Temp_IoT_Sensor_Chosen_Dataset = IoT_Sensor_Info_Dataset.loc[Info_Change_Reason_Dataset['IoT_Serial_Num'] == Person_Dataset.loc[tab4_Dataset_Index,'IoT_Serial_Num']].sort_values('Sensor_Type', ascending=True)
         st.table(Temp_IoT_Sensor_Chosen_Dataset)
         st.subheader("")

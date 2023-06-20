@@ -159,7 +159,7 @@ def pred(group_name, region_name, gender_name, age_name):
     # 한글 설정
     import matplotlib.font_manager as fm
     # 폰트 경로 설정
-    # plt.rc('font', family=font_name)
+    plt.rc('font', family=font_name)
     df_col2 = df_pivot2[region_name, gender_name, age_name].fillna(0)
     
     st.write(forecast)

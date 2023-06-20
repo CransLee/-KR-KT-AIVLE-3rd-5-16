@@ -661,15 +661,13 @@ with tab4: # 대상자 정보 및 수정
             t4_Fix_Name = st.text_input('성명', Person_Dataset.loc[tab4_Dataset_Index, 'Name'], key = 'tab4_고장_이름')
         with t4_col4_2:
             t4_Fix_Sensor_Num = st.selectbox('센서 선택', Temp_IoT_Sensor_Chosen_Dataset['Sensor_Num'].unique(), key = 'tab4_고장_센서 선택')
-
-        def t4_Success_MSG(t4_Fix_Name, t4_Fix_Sensor_Num):
-            st.success('현 대상자 '+ t4_Fix_Name + '의 ' + t4_Fix_Sensor_Num + '의 수리점검 신청이 완료되었습니다!', icon="✅")
                 
         t4_col5_1, t4_col5_2 = st.columns([0.5, 0.5])
-        with t4_col4_1:
+        with t4_col5_1:
             t4_Fix_Request_Reason = st.text_input('고장 상세 설명')
-        with t4_col4_2:
+        with t4_col5_2:
             st.text('')
             st.text('')
-            if st.button('수리점검 접수 신청', key = 'tab4_고장_접수 신청'):
-                t4_Success_MSG(t4_Fix_Name, t4_Fix_Sensor_Num)
+            t4_button_Click = st.button('수리점검 접수 신청', key = 'tab4_고장_접수 신청'):
+        if t4_button_Click:
+            st.success('현 대상자 '+ t4_Fix_Name + '의 ' + t4_Fix_Sensor_Num + '의 수리점검 신청이 완료되었습니다!', icon="✅")

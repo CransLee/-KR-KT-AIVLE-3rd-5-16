@@ -538,6 +538,8 @@ with tab2: # 감정분석 통계
         
 ###########################
 with tab3: # 1인가구 집단 통계
+    st.cache_data.clear()
+    st.cache_resource.clear()
     st.text('아래의 각 박스를 눌러 선택해주세요.')
     t3_col1_1, t3_col1_2, t3_col1_3, t3_col1_4 = st.columns([0.2,0.2,0.2,0.2]) # 조회할 값 선택
     with t3_col1_1:
@@ -594,7 +596,8 @@ with tab3: # 1인가구 집단 통계
         
 ###########################
 with tab4: # 대상자 정보 및 수정
-    
+    st.cache_data.clear()
+    st.cache_resource.clear()
     st.subheader('등록된 정보 보기')
     tab4_selectbox_1 = st.selectbox('대상자 선택', Person_Dataset['Name'].unique(), key = 'tab4_대상자선택_1')
     tab4_Dataset_Index = list(Person_Dataset.loc[Person_Dataset['Name'] == tab4_selectbox_1].index)[0]
@@ -643,8 +646,25 @@ with tab4: # 대상자 정보 및 수정
         st.write('정상적으로 정보가 반영되었습니다!')
     
     st.subheader("")
-    with st.expander("정보 변경 이력 상세보기"):
-        st.table(Info_Change_Reason_Dataset.loc[Info_Change_Reason_Dataset['Name'] == tab4_selectbox_1].sort_values('Time', ascending=False))
+    with st.expander("최근 정보 변경 이력 상세보기"):
+        st.table(Info_Change_Reason_Dataset.loc[Info_Change_Reason_Dataset['Name'] == tab4_selectbox_1].sort_values('Time', ascending=False).head(5))
     st.subheader("")
     with st.expander("IoT 센서 상세보기 및 고장접수"):
-        st.table(IoT_Sensor_Info_Dataset.loc[Info_Change_Reason_Dataset['IoT_Serial_Num'] == Person_Dataset.loc[tab4_Dataset_Index,'IoT_Serial_Num']].sort_values('Sensor_Type', ascending=True))
+        Temp_IoT_Sensor_Chosen_Dataset = IoT_Sensor_Info_Dataset.loc[Info_Change_Reason_Dataset['IoT_Serial_Num'] == Person_Dataset.loc[tab4_Dataset_Index,'IoT_Serial_Num']].sort_values('Sensor_Type', ascending=True)
+        st.table(Temp_IoT_Sensor_Chosen_Dataset)
+        st.subheader("")
+        st.subheader("고장 접수")
+        st.caption('대상자를 선택하시려면 페이지 상단에서 검색 및 선택해주세요.')
+
+        t4_col4_1, t4_col4_2 = st.columns([0.5, 0.5])
+        with t4_col4_1:
+            t4_Fix_Name = st.text_input('성명', Person_Dataset.loc[tab4_Dataset_Index, 'Name'])
+        with t4_col4_2:
+            t4_Fix_Sensor_Num = st.selectbox('센서 선택', Temp_IoT_Sensor_Chosen_Dataset['Sensor_Num'].unique(), key = 'tab4_고장_센서 선택')
+        t4_col5_1, t4_col5_2 = st.columns([0.5, 0.5])
+        with t4_col4_1:
+            t4_Fix_Request_Reason = st.text_input('고장 상세 설명')
+        with t4_col4_2:
+            if st.button('정보 변경'):
+                st.success('현 대상자 '+ t4_Fix_Name + '의 ' + t4_Fix_Sensor_Num + '의 수리점검 신청이 완료되었습니다!', icon="✅")
+        

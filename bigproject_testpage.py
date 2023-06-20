@@ -449,6 +449,8 @@ with tab1: # IoT 통계
 
 ###########################
 with tab2: # 감정분석 통계
+    st.cache_data.clear()
+    st.cache_resource.clear()
     t2_col1_1, t2_col1_2 = st.columns([0.5, 0.5])
     with t2_col1_1:
         tab2_selectbox = st.selectbox('대상자 선택', Emotion_Stat_Dataset['User'].unique(), key = 'tab2_대상자선택')
@@ -532,7 +534,7 @@ with tab2: # 감정분석 통계
     with t2_col4_2:
         st.text('주차별 상세 차트')
         st.table(Emotion_Stat_Dataset_Search_Result_3.sort_values('Week', ascending=False).head(10))    
-
+    st.stop()
         
         
 ###########################

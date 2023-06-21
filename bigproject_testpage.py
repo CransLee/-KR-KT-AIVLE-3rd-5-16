@@ -412,14 +412,14 @@ with tab1: # IoT 통계
     st.subheader('')
     t1_col2_1, t1_col2_2= st.columns([0.5, 0.5])
     with t1_col2_1:
-        st.header('전력센서 통계)
+        st.header('전력센서 통계')
         st.text('최근 50시간 기준 전력량(Wh) 그래프')
         st.line_chart(data = IoT_Stat_Dataset.loc[IoT_Stat_Dataset['시리얼'] == t1_Serial_Num], x = '등록일시', y = '전력량1 (Wh)')
         st.text('최근 7일 전력소비량(Wh) 총량의 일평균 값 그래프')
         st.line_chart(data = IoT_Stat_Dataset_Search_Result_2, x = '등록일시', y = '전력량1 (Wh) 일 평균')
             
     with t1_col2_2:
-        st.header('조도센서 통계)
+        st.header('조도센서 통계')
         st.text('최근 50시간 기준 조도(%) 그래프')
         st.line_chart(data = IoT_Stat_Dataset.loc[IoT_Stat_Dataset['시리얼'] == t1_Serial_Num], x = '등록일시', y = '조도1 (%)')
         st.text('최근 7일 조도(%)의 일평균 값 그래프')

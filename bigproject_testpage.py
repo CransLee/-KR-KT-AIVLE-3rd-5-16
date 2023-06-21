@@ -479,7 +479,7 @@ with tab2: # 감정분석 통계
     st.cache_data.clear()
     st.cache_resource.clear()
     t2_col1_1, t2_col1_2, _ = st.columns([0.33, 0.34, 0.33], gap = columns_gap)
-    t1_min_datetime, t1_max_datetime = min(Emotion_Stat_Dataset['Datetime']).datetime.date, max(Emotion_Stat_Dataset['Datetime']).datetime.date
+    t1_min_datetime, t1_max_datetime = min(Emotion_Stat_Dataset['Datetime']).dt.date, max(Emotion_Stat_Dataset['Datetime']).dt.date
     with t2_col1_1:
         st.subheader('대상자 선택')
         tab2_selectbox = st.selectbox('대상자 선택', Emotion_Stat_Dataset['User'].unique(), key = 'tab2_대상자선택', label_visibility="collapsed")

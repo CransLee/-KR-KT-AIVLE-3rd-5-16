@@ -477,7 +477,7 @@ with tab1: # IoT 통계
 with tab2: # 감정분석 통계
     st.cache_data.clear()
     st.cache_resource.clear()
-    t2_col1_1, _, t2_col1_2 = st.columns([0.33, 0.34, 0.33], gap = columns_gap)
+    t2_col1_1, t2_col1_2, _ = st.columns([0.33, 0.34, 0.33], gap = columns_gap)
     with t2_col1_1:
         st.subheader('대상자 선택')
         tab2_selectbox = st.selectbox('대상자 선택', Emotion_Stat_Dataset['User'].unique(), key = 'tab2_대상자선택', label_visibility="collapsed")
@@ -526,11 +526,13 @@ with tab2: # 감정분석 통계
     
     st.subheader('')
     if t2_Target_Type == '정상(안정)':
-        st.success('현 대상자는 '+ t2_Target_Type + '입니다!', icon="✅")
-    elif t2_Target_Type == '주의 필요' or t2_Target_Type == '심리 상담 필요':
-        st.warning('현 대상자는 '+ t2_Target_Type + '입니다!', icon="⚠️")
+        st.success('현 대상자는 정상(안정)입니다!', icon="✅")
+    elif t2_Target_Type == '주의 필요'
+        st.warning('현 대상자는 주의가 필요합니다!', icon="⚠️")
+    elif t2_Target_Type == '심리 상담 필요':
+        st.warning('현 대상자는 심리 상담이 필요합니다!', icon="⚠️")
     elif t2_Target_Type == '즉시 조치 필요':
-        st.error('현 대상자는 '+ t2_Target_Type + '입니다!', icon="🚨")
+        st.error('현 대상자는 즉시 조치가 필요합니다!', icon="🚨")
     
     
     

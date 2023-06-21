@@ -568,7 +568,7 @@ with tab2: # 감정분석 통계
 with tab3: # 1인가구 집단 통계
     st.cache_data.clear()
     st.cache_resource.clear()
-    t3_col1_1, t3_col1_2, t3_col1_3, t3_col1_4 = st.columns([0.2,0.2,0.2,0.2], gap = columns_gap) # 조회할 값 선택
+    t3_col1_1, t3_col1_2, t3_col1_3, t3_col1_4 = st.columns([0.2,0.2,0.2,0.2]) # 조회할 값 선택
     with t3_col1_1:
         st.subheader('**관심 집단 선택**')
         group = st.selectbox(" ", ['커뮤니케이션이 적은 집단','평일 외출이 적은 집단','휴일 외출이 적은 집단','출근소요시간 및 근무시간이 많은 집단','외출이 매우 적은 집단(전체)','외출이 매우 많은 집단','동영상서비스 이용이 많은 집단','생활서비스 이용이 많은 집단','재정상태에 대한 관심집단','외출-커뮤니케이션이 모두 적은 집단(전체)'])

@@ -369,7 +369,7 @@ button_style = """
 
 st.set_page_config(layout="wide")
 
-st.markdown(" ##사회복지사 통계 포털")
+st.markdown(" ## 사회복지사 통계 포털")
 tab1, tab2, tab3, tab4 = st.tabs(["IoT 통계", "감정분석 통계", "1인가구 집단 시계열 통계", "대상자 설정 대시보드"])
 
 
@@ -404,7 +404,7 @@ with tab1: # IoT 통계
     # st.table(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Electro'])
     # st.text(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Electro'].value_counts())
     with t1_col1_3:
-        t1_col1A_1, t1_col1A_2 = st.columns([0.5, 0.5], gap = columns_gap)
+        t1_col1A_1, _, t1_col1A_2 = st.columns([0.45, 0.1, 0.45], gap = columns_gap)
         with t1_col1A_1:
             if len(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Electro']) == 0:
                 st.image(Image.open('./Data/Asset/Electro_Gray.png'), caption='찾을 수 없음')
@@ -436,7 +436,7 @@ with tab1: # IoT 통계
         st.error('현 대상자의 센서 측정값 모두가 기준을 초과하였습니다! (전력: '+ str(Electro_Time) +'h / 조도 : ' + str(Light_Time) + 'h)', icon="🚨")
 
     st.subheader('')
-    t1_col2_1, _, t1_col2_2= st.columns([0.45, 0,1, 0.45], gap = columns_gap)
+    t1_col2_1, _, t1_col2_2= st.columns([0.45, 0.1, 0.45], gap = columns_gap)
     with t1_col2_1:
         st.header('전력센서 통계')
         st.text('최근 50시간 기준 전력량(Wh) 그래프')
@@ -479,7 +479,8 @@ with tab2: # 감정분석 통계
     st.cache_resource.clear()
     t2_col1_1, t2_col1_2 = st.columns([0.5, 0.5], gap = columns_gap)
     with t2_col1_1:
-        tab2_selectbox = st.selectbox('대상자 선택', Emotion_Stat_Dataset['User'].unique(), key = 'tab2_대상자선택')
+        st.subheader('대상자 선택')
+        tab2_selectbox = st.selectbox('대상자 선택', Emotion_Stat_Dataset['User'].unique(), key = 'tab2_대상자선택', label_visibility="collapsed")
         Emotion_Stat_Dataset_Search_Result_1 = Emotion_Stat_Dataset.loc[Emotion_Stat_Dataset['User'] == tab2_selectbox]
         Emotion_Stat_Dataset_Search_Result_2 = Emotion_Stat_Dataset_Search_Result_1.groupby(['Datetime'], as_index=False)[['Negative_Count']].sum()
         Emotion_Stat_Dataset_Search_Result_3 = Emotion_Stat_Dataset_Search_Result_2

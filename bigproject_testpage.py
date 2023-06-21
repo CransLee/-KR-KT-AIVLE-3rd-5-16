@@ -486,7 +486,7 @@ with tab2: # 감정분석 통계
         tab2_selectbox = st.selectbox('대상자 선택', Emotion_Stat_Dataset['User'].unique(), key = 'tab2_대상자선택', label_visibility="collapsed")
         tab2_targetdate = st.date_input('대상 날짜 선택', min_value = t1_min_datetime, max_value = t1_max_datetime, key = 'tab2_대상날짜선택', label_visibility="collapsed")
         st.text(type(tab2_targetdate))
-        st.text(t1_min_datetime.type)
+        st.text(type(t1_min_datetime))
         Emotion_Stat_Dataset_Search_Result_1 = Emotion_Stat_Dataset.loc[Emotion_Stat_Dataset['User'] == tab2_selectbox & Emotion_Stat_Dataset['Datetime'] >= t1_min_datetime & Emotion_Stat_Dataset['Datetime'] <= tab2_targetdate]
         Emotion_Stat_Dataset_Search_Result_2 = Emotion_Stat_Dataset_Search_Result_1.groupby(['Datetime'], as_index=False)[['Negative_Count']].sum()
         Emotion_Stat_Dataset_Search_Result_3 = Emotion_Stat_Dataset_Search_Result_2

@@ -409,7 +409,7 @@ with tab1: # IoT 통계
             if len(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Electro']) == 0:
                 st.image(Image.open('./Data/Asset/Electro_Gray.png'), caption='찾을 수 없음')
             elif Electro_Status == True:
-                st.image(Image.open('./Data/Asset/Electro_Red.png'), caption= Electro_Time + ' 시간 이상 변화없음')
+                st.image(Image.open('./Data/Asset/Electro_Red.png'), caption= str(Electro_Time) + ' 시간 이상 변화없음')
             elif Electro_Time >= 15:
                 st.image(Image.open('./Data/Asset/Electro_Orange.png'), caption= '15시간 이상 변화없음')
             else:
@@ -418,7 +418,7 @@ with tab1: # IoT 통계
             if len(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Light']) == 0:
                 st.image(Image.open('./Data/Asset/Light_Gray.png'), caption='찾을 수 없음')
             elif Electro_Status == True:
-                st.image(Image.open('./Data/Asset/Light_Red.png'), caption= Electro_Time + ' 시간 이상 변화없음')
+                st.image(Image.open('./Data/Asset/Light_Red.png'), caption= str(Electro_Time) + ' 시간 이상 변화없음')
             elif Electro_Time >= 15:
                 st.image(Image.open('./Data/Asset/Light_Orange.png'), caption= '15시간 이상 변화없음')
             else:

@@ -499,7 +499,7 @@ with tab2: # 감정분석 통계
         Emotion_Stat_Dataset_Search_Result_3 = Emotion_Stat_Dataset_Search_Result_3.groupby(['Week'], as_index=False)[['Negative_Count']].sum()
         
         Emotion_Stat_Dataset_Search_Result_4 = Emotion_Stat_Dataset.loc[(Emotion_Stat_Dataset['User'] == tab2_selectbox)].groupby(['Datetime'], as_index=False)[['Negative_Count']].sum()
-        Emotion_Stat_Dataset_Search_Result_4['Week'] = pd.to_datetime(Emotion_Stat_Dataset_Search_Result_3['Datetime']).map(lambda x: x.isocalendar()[1])
+        Emotion_Stat_Dataset_Search_Result_4['Week'] = pd.to_datetime(Emotion_Stat_Dataset_Search_Result_4['Datetime']).map(lambda x: x.isocalendar()[1])
         Emotion_Stat_Dataset_Search_Result_4['Week'] = Emotion_Stat_Dataset_Search_Result_3.groupby(['Week'], as_index=False)[['Negative_Count']].sum()
         
     

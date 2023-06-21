@@ -411,7 +411,7 @@ with tab1: # IoT 통계
                 st.image(Image.open('./Data/Asset/Electro_Red.jpg'), caption= Electro_Time + ' 시간 이상 변화없음')
             elif Electro_Time >= 15:
                 st.image(Image.open('./Data/Asset/Electro_Orange.jpg'), caption= '15시간 이상 변화없음')
-            else
+            else:
                 st.image(Image.open('./Data/Asset/Electro_Green.jpg'), caption= '정상 작동 중')
         with t1_col1A_2:
             if t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Light'].value_counts() == 0:
@@ -420,7 +420,7 @@ with tab1: # IoT 통계
                 st.image(Image.open('./Data/Asset/Light_Red.jpg'), caption= Electro_Time + ' 시간 이상 변화없음')
             elif Electro_Time >= 15:
                 st.image(Image.open('./Data/Asset/Light_Orange.jpg'), caption= '15시간 이상 변화없음')
-            else
+            else:
                 st.image(Image.open('./Data/Asset/Light_Green.jpg'), caption= '정상 작동 중')
         
     st.subheader('')

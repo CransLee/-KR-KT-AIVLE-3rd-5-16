@@ -369,13 +369,13 @@ button_style = """
 
 st.set_page_config(layout="wide")
 
-st.markdown("## IoT 사회복지사 통계 포털")
+st.markdown(" ##사회복지사 통계 포털")
 tab1, tab2, tab3, tab4 = st.tabs(["IoT 통계", "감정분석 통계", "1인가구 집단 시계열 통계", "대상자 설정 대시보드"])
 
 
 ###########################
 with tab1: # IoT 통계
-    t1_col1_1, t1_col1_2, t1_col1_3 = st.columns([0.33, 0.34, 0.33], gap = columns_gap)
+    t1_col1_1, _ , t1_col1_2, _ , t1_col1_3 = st.columns([0.3, 0.05, 0.3, 0.05, 0.3], gap = columns_gap)
     with t1_col1_1:
         st.subheader('대상자 선택')
         tab1_selectbox = st.selectbox('대상자 선택', Person_Dataset['Name'].unique(), key = 'tab1_대상자선택', label_visibility="collapsed")
@@ -436,7 +436,7 @@ with tab1: # IoT 통계
         st.error('현 대상자의 센서 측정값 모두가 기준을 초과하였습니다! (전력: '+ str(Electro_Time) +'h / 조도 : ' + str(Light_Time) + 'h)', icon="🚨")
 
     st.subheader('')
-    t1_col2_1, t1_col2_2= st.columns([0.5, 0.5], gap = columns_gap)
+    t1_col2_1, _, t1_col2_2= st.columns([0.45, 0,1, 0.45], gap = columns_gap)
     with t1_col2_1:
         st.header('전력센서 통계')
         st.text('최근 50시간 기준 전력량(Wh) 그래프')

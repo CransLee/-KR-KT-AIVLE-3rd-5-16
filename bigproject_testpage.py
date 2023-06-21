@@ -652,8 +652,8 @@ with tab4: # 대상자 정보 및 수정
     with st.expander("IoT 센서 상세보기 및 고장접수"):
         st.text(Person_Dataset.loc[tab4_Dataset_Index,'IoT_Serial_Num'])
         Temp_IoT_Sensor_Chosen_Dataset = IoT_Sensor_Info_Dataset.loc[IoT_Sensor_Info_Dataset['IoT_Serial_Num'] == Person_Dataset.loc[tab4_Dataset_Index,'IoT_Serial_Num']].sort_values('Sensor_Type', ascending=True)
-        st.table(IoT_Sensor_Info_Dataset)
         st.table(Temp_IoT_Sensor_Chosen_Dataset)
+        st.caption('IoT_Sensor_Num: 1인가구 개개인에게 부여된 식별코드 / Sensor_Type: 센서 종류, 전력(Electro) 또는 조도(Light) / Sensor_Count: 센서 종류 별 등록순서 / Sensor_Num: 해당 센서의 식별코드')
         st.subheader("")
         st.subheader("고장 접수")
         st.caption('대상자를 선택하시려면 페이지 상단에서 검색 및 선택해주세요.')

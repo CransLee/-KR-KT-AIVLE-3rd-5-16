@@ -407,22 +407,22 @@ with tab1: # IoT 통계
         t1_col1A_1, t1_col1A_2 = st.columns([0.5, 0.5], gap = columns_gap)
         with t1_col1A_1:
             if len(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Electro']) == 0:
-                st.image(Image.open('./Data/Asset/Electro_Gray.jpg'), caption='찾을 수 없음')
+                st.image(Image.open('./Data/Asset/Electro_Gray.png'), caption='찾을 수 없음')
             elif Electro_Status == True:
-                st.image(Image.open('./Data/Asset/Electro_Red.jpg'), caption= Electro_Time + ' 시간 이상 변화없음')
+                st.image(Image.open('./Data/Asset/Electro_Red.png'), caption= Electro_Time + ' 시간 이상 변화없음')
             elif Electro_Time >= 15:
-                st.image(Image.open('./Data/Asset/Electro_Orange.jpg'), caption= '15시간 이상 변화없음')
+                st.image(Image.open('./Data/Asset/Electro_Orange.png'), caption= '15시간 이상 변화없음')
             else:
-                st.image(Image.open('./Data/Asset/Electro_Green.jpg'), caption= '정상 작동 중')
+                st.image(Image.open('./Data/Asset/Electro_Green.png'), caption= '정상 작동 중')
         with t1_col1A_2:
             if len(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Light']) == 0:
-                st.image(Image.open('./Data/Asset/Light_Gray.jpg'), caption='찾을 수 없음')
+                st.image(Image.open('./Data/Asset/Light_Gray.png'), caption='찾을 수 없음')
             elif Electro_Status == True:
-                st.image(Image.open('./Data/Asset/Light_Red.jpg'), caption= Electro_Time + ' 시간 이상 변화없음')
+                st.image(Image.open('./Data/Asset/Light_Red.png'), caption= Electro_Time + ' 시간 이상 변화없음')
             elif Electro_Time >= 15:
-                st.image(Image.open('./Data/Asset/Light_Orange.jpg'), caption= '15시간 이상 변화없음')
+                st.image(Image.open('./Data/Asset/Light_Orange.png'), caption= '15시간 이상 변화없음')
             else:
-                st.image(Image.open('./Data/Asset/Light_Green.jpg'), caption= '정상 작동 중')
+                st.image(Image.open('./Data/Asset/Light_Green.png'), caption= '정상 작동 중')
         
     st.subheader('')
     if Electro_Status == False and Light_Status == False:

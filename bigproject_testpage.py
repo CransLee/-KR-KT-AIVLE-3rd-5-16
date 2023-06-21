@@ -33,7 +33,7 @@ values = ['20대', '30대', '40대', '50대', '60대', '70대']
 Lone_Person_Dataset['연령대'] = np.select(conditions, values, default='80대')
 
 font_name = font_manager.FontProperties(fname='./Data/Font/NanumGothic.otf').get_name()
-columns_gap = 'medium'
+columns_gap = 'large'
 
 ########################### ARIMA 모델 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
@@ -426,25 +426,25 @@ with tab1: # IoT 통계
         st.text('최근 7일 조도(%)의 일평균 값 그래프')
         st.line_chart(data = IoT_Stat_Dataset_Search_Result_2, x = '등록일시', y = '조도1 (%) 일 평균')
 
+    with st.expander("센서 통계 데이터 차트 상세보기"):
+        st.subheader('센서 통계 상세 : ' + t1_Serial_Num)
+        t1_col4_1, t1_col4_2, t1_col4_3 = st.columns([0.33, 0.34, 0.33], gap = columns_gap)
+        with t1_col4_1:
+            tab1_selectbox_2 = st.selectbox('상세보기 대상자 선택', Person_Dataset['Name'].unique(), key = 'tab1_대상자선택_2')
+            t1_Serial_Num_2 = Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab1_selectbox_2].index, 'IoT_Serial_Num'].reset_index(drop=True)[0]
+            st.text(t1_Serial_Num_2)
+            IoT_Stat_Dataset_Search_Result_3 = IoT_Stat_Dataset.loc[IoT_Stat_Dataset['시리얼'] == t1_Serial_Num_2]
+#             IoT_Stat_Dataset_Search_Result_3['등록일시'] = pd.to_datetime(IoT_Stat_Dataset_Search_Result_3['등록일시'], format='%Y-%m-%d').dt.date 
+            IoT_Stat_Dataset_Search_Result_3['등록일시'] = pd.to_datetime(IoT_Stat_Dataset_Search_Result_3['등록일시']).dt.date 
+        with t1_col4_2:
+            Min_Datetime, Max_Datetime = min(IoT_Stat_Dataset_Search_Result_3['등록일시']), max(IoT_Stat_Dataset_Search_Result_3['등록일시'])
+            Datetime_array = st.slider('날짜 범위', value = (Min_Datetime, Max_Datetime))
+        with t1_col4_3:
+            IoT_Sort_Value = st.selectbox('정렬기준', ['내림차순', '오름차순'])
+            if IoT_Sort_Value == '오름차순': IoT_Sort_Value = True
+            elif IoT_Sort_Value == '내림차순': IoT_Sort_Value = False
         
-    st.subheader('센서 통계 데이터 상세보기 : ' + t1_Serial_Num)
-    t1_col4_1, t1_col4_2, t1_col4_3 = st.columns([0.33, 0.34, 0.33], gap = columns_gap)
-    with t1_col4_1:
-        tab1_selectbox_2 = st.selectbox('상세보기 대상자 선택', Person_Dataset['Name'].unique(), key = 'tab1_대상자선택_2')
-        t1_Serial_Num_2 = Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab1_selectbox_2].index, 'IoT_Serial_Num'].reset_index(drop=True)[0]
-        st.text(t1_Serial_Num_2)
-        IoT_Stat_Dataset_Search_Result_3 = IoT_Stat_Dataset.loc[IoT_Stat_Dataset['시리얼'] == t1_Serial_Num_2]
-#         IoT_Stat_Dataset_Search_Result_3['등록일시'] = pd.to_datetime(IoT_Stat_Dataset_Search_Result_3['등록일시'], format='%Y-%m-%d').dt.date 
-        IoT_Stat_Dataset_Search_Result_3['등록일시'] = pd.to_datetime(IoT_Stat_Dataset_Search_Result_3['등록일시']).dt.date 
-    with t1_col4_2:
-        Min_Datetime, Max_Datetime = min(IoT_Stat_Dataset_Search_Result_3['등록일시']), max(IoT_Stat_Dataset_Search_Result_3['등록일시'])
-        Datetime_array = st.slider('날짜 범위', value = (Min_Datetime, Max_Datetime))
-    with t1_col4_3:
-        IoT_Sort_Value = st.selectbox('정렬기준', ['내림차순', '오름차순'])
-        if IoT_Sort_Value == '오름차순': IoT_Sort_Value = True
-        elif IoT_Sort_Value == '내림차순': IoT_Sort_Value = False
-        
-    st.table(IoT_Stat_Dataset.loc[(IoT_Stat_Dataset['시리얼'] == t1_Serial_Num_2) & (pd.to_datetime(IoT_Stat_Dataset['등록일시']) >= pd.to_datetime(Datetime_array[0])) 
+        st.table(IoT_Stat_Dataset.loc[(IoT_Stat_Dataset['시리얼'] == t1_Serial_Num_2) & (pd.to_datetime(IoT_Stat_Dataset['등록일시']) >= pd.to_datetime(Datetime_array[0])) 
                                   & (pd.to_datetime(IoT_Stat_Dataset['등록일시']) <= pd.to_datetime(Datetime_array[1]))].set_index('등록일시')[['조도1 (%)', '전력량1 (Wh)']]
                                  .sort_values('등록일시', ascending = IoT_Sort_Value))
 
@@ -526,15 +526,16 @@ with tab2: # 감정분석 통계
         st.bar_chart(data = Emotion_Stat_Dataset_Search_Result_3, x = 'Week', y = 'Negative_Count')
 
         
-    st.subheader('상세 차트 보기')
-    t2_col4_1, t2_col4_2 = st.columns([0.5, 0.5], gap = columns_gap)
-    with t2_col4_1:
-        st.text('시간대별 상세 차트')
-        st.table(Emotion_Stat_Dataset_Search_Result_1[['Start_Time', 'End_Time', 'Negative_Count']].sort_values('End_Time', ascending=False).head(10))
+    with st.expander("감정분류 데이터 차트 상세보기"):
+        st.subheader('상세 차트: ' + tab2_selectbox)
+        t2_col4_1, t2_col4_2 = st.columns([0.5, 0.5], gap = columns_gap)
+        with t2_col4_1:
+            st.text('시간대별 상세 차트')
+            st.table(Emotion_Stat_Dataset_Search_Result_1[['Start_Time', 'End_Time', 'Negative_Count']].sort_values('End_Time', ascending=False).head(10))
         
-    with t2_col4_2:
-        st.text('주차별 상세 차트')
-        st.table(Emotion_Stat_Dataset_Search_Result_3.sort_values('Week', ascending=False).head(10))    
+        with t2_col4_2:
+            st.text('주차별 상세 차트')
+            st.table(Emotion_Stat_Dataset_Search_Result_3.sort_values('Week', ascending=False).head(10))    
         
         
 ###########################

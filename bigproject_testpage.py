@@ -10,6 +10,7 @@ import plotly.express as px
 import datetime
 import zipfile
 from matplotlib import font_manager,rc
+from PIL import Image
 
 # os.chdir('/Users/lgu01/Python_Personal/big_project')
 Emotion_Stat_Dataset = pd.read_excel('./Data/Emotion_Data/Emotion_Stat_Dataset.xlsx')
@@ -374,7 +375,7 @@ tab1, tab2, tab3, tab4 = st.tabs(["IoT 통계", "감정분석 통계", "1인가�
 
 ###########################
 with tab1: # IoT 통계
-    t1_col1_1, t1_col1_2 = st.columns([0.5, 0.5], gap = columns_gap)
+    t1_col1_1, t1_col1_2, t1_col1_3 = st.columns([0.33, 0.34, 0.33], gap = columns_gap)
     with t1_col1_1:
         st.subheader('대상자 선택')
         tab1_selectbox = st.selectbox('대상자 선택', Person_Dataset['Name'].unique(), key = 'tab1_대상자선택', label_visibility="collapsed")
@@ -382,7 +383,8 @@ with tab1: # IoT 통계
     t1_Serial_Num = Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab1_selectbox].index, 'IoT_Serial_Num'].reset_index(drop=True)[0]
     IoT_Stat_Dataset_Search_Result_1, IoT_Stat_Dataset_Search_Result_2, t1_Target_Type, IoT_Target_Status = IoT_add_set_Dataset(IoT_Stat_Dataset.loc[IoT_Stat_Dataset['시리얼'] == t1_Serial_Num]) # 함수 별도 추가
     t1_Target_Type = Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab1_selectbox].index, 'IoT_Type'].reset_index(drop=True)[0]
-    
+    t1_Temp_IoT_Sensor_Chosen_Dataset = IoT_Sensor_Info_Dataset.loc[IoT_Sensor_Info_Dataset['IoT_Serial_Num'] == t1_Serial_Num].sort_values('Sensor_Type', ascending=True)
+        
     t1_Target_Alert_Time = 0
     if t1_Target_Type == '일반군':
         t1_Target_Alert_Time = 50
@@ -399,6 +401,27 @@ with tab1: # IoT 통계
         st.subheader('현재 상태')
         st.text('- 대상자 시리얼 번호 : ' +  t1_Serial_Num)
         st.text('- 대상자 분류 : ' + t1_Target_Type + ' => ' + str(t1_Target_Alert_Time) + '시간 적용 대상')
+
+    with t1_col1_3:
+        t1_col1A_1, t1_col1A_2 = st.columns([0.5, 0.5], gap = columns_gap)
+        with t1_col1A_1:
+            if t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Electro'].value_counts() == 0:
+                st.image(Image.open('./Data/Asset/Electro_Gray.jpg'), caption='찾을 수 없음')
+            elif Electro_Status == True:
+                st.image(Image.open('./Data/Asset/Electro_Red.jpg'), caption= Electro_Time + ' 시간 이상 변화없음')
+            elif Electro_Time >= 15:
+                st.image(Image.open('./Data/Asset/Electro_Orange.jpg'), caption= '15시간 이상 변화없음')
+            else
+                st.image(Image.open('./Data/Asset/Electro_Green.jpg'), caption= '정상 작동 중')
+        with t1_col1A_2:
+            if t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Light'].value_counts() == 0:
+                st.image(Image.open('./Data/Asset/Light_Gray.jpg'), caption='찾을 수 없음')
+            elif Electro_Status == True:
+                st.image(Image.open('./Data/Asset/Light_Red.jpg'), caption= Electro_Time + ' 시간 이상 변화없음')
+            elif Electro_Time >= 15:
+                st.image(Image.open('./Data/Asset/Light_Orange.jpg'), caption= '15시간 이상 변화없음')
+            else
+                st.image(Image.open('./Data/Asset/Light_Green.jpg'), caption= '정상 작동 중')
         
     st.subheader('')
     if Electro_Status == False and Light_Status == False:

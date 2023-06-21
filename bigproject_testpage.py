@@ -401,7 +401,8 @@ with tab1: # IoT 통계
         st.subheader('현재 상태')
         st.text('- 대상자 시리얼 번호 : ' +  t1_Serial_Num)
         st.text('- 대상자 분류 : ' + t1_Target_Type + ' => ' + str(t1_Target_Alert_Time) + '시간 적용 대상')
-
+    st.table(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Electro'])
+    st.text(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Electro'].value_counts())
     with t1_col1_3:
         t1_col1A_1, t1_col1A_2 = st.columns([0.5, 0.5], gap = columns_gap)
         with t1_col1A_1:

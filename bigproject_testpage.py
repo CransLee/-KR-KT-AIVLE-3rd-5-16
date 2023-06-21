@@ -152,7 +152,7 @@ def pred(group_name, region_name, gender_name, age_name):
     end_idx = start_idx + 12  # 12개월치 예측
     forecast = fitted_model.predict(start=start_idx, end=end_idx, typ='levels')
     forecast_index = pd.date_range(start=df_col.index[-1], periods=13, freq='M')[1:]
-    forecast = pd.Series(forecast, index=forecast_index)
+    forecast = pd.Series(forecast, index=forecast_index, name='predict')
    
     df_ts2 = x_test.groupby(['month', '자치구', '성별', '연령대']).sum().reset_index()
 

@@ -33,6 +33,7 @@ values = ['20대', '30대', '40대', '50대', '60대', '70대']
 Lone_Person_Dataset['연령대'] = np.select(conditions, values, default='80대')
 
 font_name = font_manager.FontProperties(fname='./Data/Font/NanumGothic.otf').get_name()
+columns_gap = 'medium'
 
 ########################### ARIMA 모델 함수 ########################################### 박소은 작성 => 이강욱 수정 및 통합
 def Lone_Person_Dataset_Loader(group_name, region_name, gender_name, age_name):
@@ -373,7 +374,7 @@ tab1, tab2, tab3, tab4 = st.tabs(["IoT 통계", "감정분석 통계", "1인가�
 
 ###########################
 with tab1: # IoT 통계
-    t1_col1_1, t1_col1_2 = st.columns([0.5, 0.5])
+    t1_col1_1, t1_col1_2 = st.columns([0.5, 0.5], gap = columns_gap)
     with t1_col1_1:
         st.subheader('대상자 선택')
         tab1_selectbox = st.selectbox('대상자 선택', Person_Dataset['Name'].unique(), key = 'tab1_대상자선택', label_visibility="collapsed")
@@ -410,7 +411,7 @@ with tab1: # IoT 통계
         st.error('현 대상자의 센서 측정값 모두가 기준을 초과하였습니다! (전력: '+ str(Electro_Time) +'h / 조도 : ' + str(Light_Time) + 'h)', icon="🚨")
 
     st.subheader('')
-    t1_col2_1, t1_col2_2= st.columns([0.5, 0.5])
+    t1_col2_1, t1_col2_2= st.columns([0.5, 0.5], gap = columns_gap)
     with t1_col2_1:
         st.header('전력센서 통계')
         st.text('최근 50시간 기준 전력량(Wh) 그래프')
@@ -427,7 +428,7 @@ with tab1: # IoT 통계
 
         
     st.subheader('센서 통계 데이터 상세보기 : ' + t1_Serial_Num)
-    t1_col4_1, t1_col4_2, t1_col4_3 = st.columns([0.33, 0.34, 0.33])
+    t1_col4_1, t1_col4_2, t1_col4_3 = st.columns([0.33, 0.34, 0.33], gap = columns_gap)
     with t1_col4_1:
         tab1_selectbox_2 = st.selectbox('상세보기 대상자 선택', Person_Dataset['Name'].unique(), key = 'tab1_대상자선택_2')
         t1_Serial_Num_2 = Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab1_selectbox_2].index, 'IoT_Serial_Num'].reset_index(drop=True)[0]
@@ -451,7 +452,7 @@ with tab1: # IoT 통계
 with tab2: # 감정분석 통계
     st.cache_data.clear()
     st.cache_resource.clear()
-    t2_col1_1, t2_col1_2 = st.columns([0.5, 0.5])
+    t2_col1_1, t2_col1_2 = st.columns([0.5, 0.5], gap = columns_gap)
     with t2_col1_1:
         tab2_selectbox = st.selectbox('대상자 선택', Emotion_Stat_Dataset['User'].unique(), key = 'tab2_대상자선택')
         Emotion_Stat_Dataset_Search_Result_1 = Emotion_Stat_Dataset.loc[Emotion_Stat_Dataset['User'] == tab2_selectbox]
@@ -508,7 +509,7 @@ with tab2: # 감정분석 통계
     
     
     st.subheader('')
-    t2_col3_1, t2_col3_2, t2_col3_3 = st.columns([0.3, 0.3, 0.3])
+    t2_col3_1, t2_col3_2, t2_col3_3 = st.columns([0.3, 0.3, 0.3], gap = columns_gap)
     with t2_col3_1:
         st.subheader('시간대별 부정 횟수 집계 그래프')
         st.text('최근 시간대 집계 횟수 : ' + str(Emotion_Stat_Dataset_Search_Result_1.sort_values('Start_Time', ascending = False).reset_index(drop=True).loc[0, 'Negative_Count']) + '회')
@@ -526,7 +527,7 @@ with tab2: # 감정분석 통계
 
         
     st.subheader('상세 차트 보기')
-    t2_col4_1, t2_col4_2 = st.columns([0.5, 0.5])
+    t2_col4_1, t2_col4_2 = st.columns([0.5, 0.5], gap = columns_gap)
     with t2_col4_1:
         st.text('시간대별 상세 차트')
         st.table(Emotion_Stat_Dataset_Search_Result_1[['Start_Time', 'End_Time', 'Negative_Count']].sort_values('End_Time', ascending=False).head(10))
@@ -541,7 +542,7 @@ with tab3: # 1인가구 집단 통계
     st.cache_data.clear()
     st.cache_resource.clear()
     st.text('아래의 각 박스를 눌러 선택해주세요.')
-    t3_col1_1, t3_col1_2, t3_col1_3, t3_col1_4 = st.columns([0.2,0.2,0.2,0.2]) # 조회할 값 선택
+    t3_col1_1, t3_col1_2, t3_col1_3, t3_col1_4 = st.columns([0.2,0.2,0.2,0.2], gap = columns_gap) # 조회할 값 선택
     with t3_col1_1:
         st.subheader('**관심 집단 선택**')
         group = st.selectbox(" ", ['커뮤니케이션이 적은 집단','평일 외출이 적은 집단','휴일 외출이 적은 집단','출근소요시간 및 근무시간이 많은 집단','외출이 매우 적은 집단(전체)','외출이 매우 많은 집단','동영상서비스 이용이 많은 집단','생활서비스 이용이 많은 집단','재정상태에 대한 관심집단','외출-커뮤니케이션이 모두 적은 집단(전체)'])
@@ -568,7 +569,7 @@ with tab3: # 1인가구 집단 통계
 #     st.header(' ')
 #     st.header(' ')
 
-    t3_col2_1, _, t3_col2_2 = st.columns([0.6, 0.1, 0.3]) # 시계열차트
+    t3_col2_1, _, t3_col2_2 = st.columns([0.6, 0.1, 0.3], gap = columns_gap) # 시계열차트
     with t3_col2_1:
         st.subheader(f'**{group}에 속하는 {region} {age} {gender} 1인가구의 수**')
         Lone_Person_Dataset_Loader(group, region, gender, age)
@@ -582,7 +583,7 @@ with tab3: # 1인가구 집단 통계
     st.header(' ')
 
     
-    t3_col3_1, t3_col3_2 = st.columns([0.5, 0.5]) # 파이차트
+    t3_col3_1, t3_col3_2 = st.columns([0.5, 0.5], gap = columns_gap) # 파이차트
     with t3_col3_1:
         st.subheader(f'**현재 {region} {age} {gender} 1인가구 집단 비중**')
         fig = piechart(region, gender, age)
@@ -603,19 +604,19 @@ with tab4: # 대상자 정보 및 수정
     tab4_Dataset_Index = list(Person_Dataset.loc[Person_Dataset['Name'] == tab4_selectbox_1].index)[0]
     tab4_Dataset = Person_Dataset.loc[tab4_Dataset_Index]
     
-    t4_col1_1, t4_col1_2 = st.columns([0.5, 0.5])
+    t4_col1_1, t4_col1_2 = st.columns([0.5, 0.5], gap = columns_gap)
     with t4_col1_1:
         t4_Name = st.text_input('성명', Person_Dataset.loc[tab4_Dataset_Index, 'Name'])
     with t4_col1_2:
         t4_Serial_Num = st.text_input('시리얼 번호', Person_Dataset.loc[tab4_Dataset_Index,'IoT_Serial_Num'])
         
-    t4_col2_1, t4_col2_2 = st.columns([0.5, 0.5])
+    t4_col2_1, t4_col2_2 = st.columns([0.5, 0.5], gap = columns_gap)
     with t4_col2_1:
         t4_Emotion_Type = st.text_input('감정분석 기준 분류', Person_Dataset.loc[tab4_Dataset_Index,'Emotion_Type'])
     with t4_col2_2:
         t4_IoT_Type = st.text_input('IoT센서 기준 분류', Person_Dataset.loc[tab4_Dataset_Index,'IoT_Type'])
         
-    t4_col3_1, t4_col3_2 = st.columns([0.5, 0.5])
+    t4_col3_1, t4_col3_2 = st.columns([0.5, 0.5], gap = columns_gap)
     with t4_col3_1:
         t4_Phone_Num = st.text_input('전화번호(P.H.)', Person_Dataset.loc[tab4_Dataset_Index,'Phone_Num'])
     with t4_col3_2:
@@ -657,13 +658,13 @@ with tab4: # 대상자 정보 및 수정
         st.subheader("고장 접수")
         st.caption('대상자를 선택하시려면 페이지 상단에서 검색 및 선택해주세요.')
 
-        t4_col4_1, t4_col4_2 = st.columns([0.5, 0.5])
+        t4_col4_1, t4_col4_2 = st.columns([0.5, 0.5], gap = columns_gap)
         with t4_col4_1:
             t4_Fix_Name = st.text_input('성명', Person_Dataset.loc[tab4_Dataset_Index, 'Name'], key = 'tab4_고장_이름')
         with t4_col4_2:
             t4_Fix_Sensor_Num = st.selectbox('센서 선택', Temp_IoT_Sensor_Chosen_Dataset['Sensor_Num'].unique(), key = 'tab4_고장_센서 선택')
                 
-        t4_col5_1, t4_col5_2 = st.columns([0.5, 0.5])
+        t4_col5_1, t4_col5_2 = st.columns([0.5, 0.5], gap = columns_gap)
         with t4_col5_1:
             t4_Fix_Request_Reason = st.text_input('고장 상세 설명')
         with t4_col5_2:

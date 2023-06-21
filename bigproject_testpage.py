@@ -497,10 +497,15 @@ with tab2: # 감정분석 통계
         Emotion_Stat_Dataset_Search_Result_3 = Emotion_Stat_Dataset_Search_Result_2
         Emotion_Stat_Dataset_Search_Result_3['Week'] = pd.to_datetime(Emotion_Stat_Dataset_Search_Result_3['Datetime']).map(lambda x: x.isocalendar()[1])
         Emotion_Stat_Dataset_Search_Result_3 = Emotion_Stat_Dataset_Search_Result_3.groupby(['Week'], as_index=False)[['Negative_Count']].sum()
+        
+        Emotion_Stat_Dataset_Search_Result_4 = Emotion_Stat_Dataset.loc[(Emotion_Stat_Dataset['User'] == tab2_selectbox)].groupby(['Datetime'], as_index=False)[['Negative_Count']].sum()
+        Emotion_Stat_Dataset_Search_Result_4['Week'] = pd.to_datetime(Emotion_Stat_Dataset_Search_Result_3['Datetime']).map(lambda x: x.isocalendar()[1])
+        Emotion_Stat_Dataset_Search_Result_4['Week'] = Emotion_Stat_Dataset_Search_Result_3.groupby(['Week'], as_index=False)[['Negative_Count']].sum()
+        
     
     t2_Serial_Num = Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab2_selectbox].index, 'IoT_Serial_Num'].reset_index(drop=True)[0]
     t2_Target_Type = Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab2_selectbox].index, 'Emotion_Type'].reset_index(drop=True)[0]
-    Last_Week_Negative_Count = Emotion_Stat_Dataset_Search_Result_3.sort_values('Week', ascending = False).reset_index(drop=True).loc[0, 'Negative_Count']
+    Last_Week_Negative_Count = Emotion_Stat_Dataset_Search_Result_4.sort_values('Week', ascending = False).reset_index(drop=True).loc[0, 'Negative_Count']
     
     if Last_Week_Negative_Count < 100 and Last_Week_Negative_Count != '정상(안정)':
         Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab2_selectbox].index, 'Emotion_Type'] = '정상(안정)'
@@ -544,6 +549,8 @@ with tab2: # 감정분석 통계
         st.warning('현 대상자는 심리 상담이 필요합니다!', icon="⚠️")
     elif t2_Target_Type == '즉시 조치 필요':
         st.error('현 대상자는 즉시 조치가 필요합니다!', icon="🚨")
+
+    Emotion_Stat_Dataset_Search_Result_4 = None
     
     
     
@@ -577,6 +584,9 @@ with tab2: # 감정분석 통계
             st.text('주차별 상세 차트')
             st.table(Emotion_Stat_Dataset_Search_Result_3.sort_values('Week', ascending=False).head(10))    
         
+    Emotion_Stat_Dataset_Search_Result_1 = None
+    Emotion_Stat_Dataset_Search_Result_2 = None
+    Emotion_Stat_Dataset_Search_Result_3 = None
         
 ###########################
 with tab3: # 1인가구 집단 통계

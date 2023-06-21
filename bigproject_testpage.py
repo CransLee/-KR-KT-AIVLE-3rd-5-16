@@ -477,7 +477,7 @@ with tab1: # IoT 통계
 with tab2: # 감정분석 통계
     st.cache_data.clear()
     st.cache_resource.clear()
-    t2_col1_1, t2_col1_2 = st.columns([0.5, 0.5], gap = columns_gap)
+    t2_col1_1, _, t2_col1_2 = st.columns([0.33, 0.34, 0.33], gap = columns_gap)
     with t2_col1_1:
         st.subheader('대상자 선택')
         tab2_selectbox = st.selectbox('대상자 선택', Emotion_Stat_Dataset['User'].unique(), key = 'tab2_대상자선택', label_visibility="collapsed")

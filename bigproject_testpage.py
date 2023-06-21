@@ -554,7 +554,7 @@ with tab2: # 감정분석 통계
     with t2_col3_2:
         st.subheader('일별 총 부정 횟수 집계 그래프')
         st.text(Emotion_Stat_Dataset_Search_Result_2.loc[0, 'Datetime'])
-        Emotion_Stat_Dataset_Search_Result_2.loc['Datetime'] = Emotion_Stat_Dataset_Search_Result_2['Datetime'].apply(lambda x: pd.to_datetime(str(x), format='%Y-%m-%d'))
+        Emotion_Stat_Dataset_Search_Result_2.loc['Datetime'] = Emotion_Stat_Dataset_Search_Result_2['Datetime'].strfttime('%y-%m-%d')
         st.text(Emotion_Stat_Dataset_Search_Result_2.loc[0, 'Datetime'])
         st.text('최근 마지막 일 집계 횟수 : ' + str(Emotion_Stat_Dataset_Search_Result_2.sort_values('Datetime', ascending = False).reset_index(drop=True).loc[0, 'Negative_Count']) + '회')
         st.bar_chart(data = Emotion_Stat_Dataset_Search_Result_2.tail(7), x = 'Datetime', y = 'Negative_Count')

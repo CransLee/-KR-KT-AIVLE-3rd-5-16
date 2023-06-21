@@ -488,7 +488,7 @@ with tab2: # 감정분석 통계
         st.text(type(tab2_targetdate))
         st.text(type(t1_min_datetime))
         st.text(type(Emotion_Stat_Dataset.loc[0, 'Datetime']))
-        tab2_targetdate = time.mktime(tab2_targetdate.timetuple())
+        # tab2_targetdate = time.mktime(tab2_targetdate.timetuple())
         Emotion_Stat_Dataset_Search_Result_1 = Emotion_Stat_Dataset.loc[(Emotion_Stat_Dataset['User'] == tab2_selectbox) & (Emotion_Stat_Dataset['Datetime'] >= t1_min_datetime) & (Emotion_Stat_Dataset['Datetime'] <= tab2_targetdate)]
         Emotion_Stat_Dataset_Search_Result_2 = Emotion_Stat_Dataset_Search_Result_1.groupby(['Datetime'], as_index=False)[['Negative_Count']].sum()
         Emotion_Stat_Dataset_Search_Result_3 = Emotion_Stat_Dataset_Search_Result_2

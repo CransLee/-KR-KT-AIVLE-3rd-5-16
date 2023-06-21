@@ -418,9 +418,9 @@ with tab1: # IoT 통계
             st.text('')
             if len(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Light']) == 0:
                 st.image(Image.open('./Data/Asset/Light_Gray.png'), caption='찾을 수 없음')
-            elif Electro_Status == True:
-                st.image(Image.open('./Data/Asset/Light_Red.png'), caption= str(Electro_Time) + ' 시간 이상 변화없음')
-            elif Electro_Time >= 15:
+            elif Light_Status == True:
+                st.image(Image.open('./Data/Asset/Light_Red.png'), caption= str(Light_Time) + ' 시간 이상 변화없음')
+            elif Light_Time >= 15:
                 st.image(Image.open('./Data/Asset/Light_Orange.png'), caption= '15시간 이상 변화없음')
             else:
                 st.image(Image.open('./Data/Asset/Light_Green.png'), caption= '정상 작동 중')

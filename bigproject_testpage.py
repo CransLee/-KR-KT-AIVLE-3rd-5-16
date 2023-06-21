@@ -552,13 +552,13 @@ with tab2: # 감정분석 통계
     with t2_col3_1:
         st.subheader('시간대별 부정 횟수 집계 그래프')
         st.text('최근 시간대 집계 횟수 : ' + str(Emotion_Stat_Dataset_Search_Result_1.sort_values('Start_Time', ascending = False).reset_index(drop=True).loc[0, 'Negative_Count']) + '회')
-        st.bar_chart(data = Emotion_Stat_Dataset_Search_Result_1, x = 'Start_Time', y = 'Negative_Count')
+        st.line_chart(data = Emotion_Stat_Dataset_Search_Result_1.tail(8), x = 'Start_Time', y = 'Negative_Count')
         
     with t2_col3_2:
         st.subheader('일별 총 부정 횟수 집계 그래프')
         Emotion_Stat_Dataset_Search_Result_2['Datetime'] = Emotion_Stat_Dataset_Search_Result_2['Datetime'].dt.date
         st.text('최근 마지막 일 집계 횟수 : ' + str(Emotion_Stat_Dataset_Search_Result_2.sort_values('Datetime', ascending = False).reset_index(drop=True).loc[0, 'Negative_Count']) + '회')
-        st.bar_chart(data = Emotion_Stat_Dataset_Search_Result_2.set_index('Datetime').tail(7), y = 'Negative_Count')
+        st.line_chart(data = Emotion_Stat_Dataset_Search_Result_2.tail(7), x = 'Datetime', y = 'Negative_Count')
         
     with t2_col3_3:
         st.subheader('주간별 총 부정 횟수 집계 그래프')

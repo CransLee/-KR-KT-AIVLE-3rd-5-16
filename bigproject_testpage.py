@@ -484,6 +484,9 @@ with tab2: # 감정분석 통계
     with t2_col1_1:
         st.subheader('대상자 선택')
         tab2_selectbox = st.selectbox('대상자 선택', Emotion_Stat_Dataset['User'].unique(), key = 'tab2_대상자선택', label_visibility="collapsed")
+
+    with t2_col1_2:
+        st.subheader('기준일 선택')
         tab2_targetdate = pd.to_datetime(st.date_input('대상 날짜 선택',value=datetime.date(2023, 6, 25), min_value = t1_min_datetime, max_value = t1_max_datetime, key = 'tab2_대상날짜선택', label_visibility="collapsed"))
         # tab2_targetdate = time.mktime(tab2_targetdate.timetuple())
         # st.text(type(tab2_targetdate))
@@ -526,7 +529,7 @@ with tab2: # 감정분석 통계
     elif t2_Target_Type == '즉시 조치 필요':
         Target_Negative_Count, Target_Negative_Count_Text = 150, '150회 이상 적용'
 
-    with t2_col1_2:
+    with t2_col1_3:
         st.subheader('현재 상태')
         st.text('- 대상자 시리얼 번호 : ' +  t2_Serial_Num)
         st.text('- 대상자 분류 : ' + t2_Target_Type + ' => ' + Target_Negative_Count_Text)
@@ -553,10 +556,7 @@ with tab2: # 감정분석 통계
         
     with t2_col3_2:
         st.subheader('일별 총 부정 횟수 집계 그래프')
-        st.text(Emotion_Stat_Dataset_Search_Result_2.loc[0, 'Datetime'])
         Emotion_Stat_Dataset_Search_Result_2['Datetime'] = Emotion_Stat_Dataset_Search_Result_2['Datetime'].dt.date
-        st.text(Emotion_Stat_Dataset_Search_Result_2.loc[0, 'Datetime'])
-        st.text(type(Emotion_Stat_Dataset_Search_Result_2.loc[0, 'Datetime']))
         st.text('최근 마지막 일 집계 횟수 : ' + str(Emotion_Stat_Dataset_Search_Result_2.sort_values('Datetime', ascending = False).reset_index(drop=True).loc[0, 'Negative_Count']) + '회')
         st.bar_chart(data = Emotion_Stat_Dataset_Search_Result_2.tail(7), x = 'Datetime', y = 'Negative_Count')
         

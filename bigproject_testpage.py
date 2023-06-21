@@ -527,7 +527,7 @@ with tab2: # 감정분석 통계
     st.subheader('')
     if t2_Target_Type == '정상(안정)':
         st.success('현 대상자는 정상(안정)입니다!', icon="✅")
-    elif t2_Target_Type == '주의 필요'
+    elif t2_Target_Type == '주의 필요':
         st.warning('현 대상자는 주의가 필요합니다!', icon="⚠️")
     elif t2_Target_Type == '심리 상담 필요':
         st.warning('현 대상자는 심리 상담이 필요합니다!', icon="⚠️")

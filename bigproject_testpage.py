@@ -7,7 +7,7 @@ import numpy as np
 from statsmodels.tsa.arima.model import ARIMA
 import matplotlib.pyplot as plt
 import plotly.express as px
-import datetime
+import datetime as dt
 import zipfile
 from matplotlib import font_manager,rc
 from PIL import Image

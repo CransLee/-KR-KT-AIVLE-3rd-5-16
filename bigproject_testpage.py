@@ -568,7 +568,6 @@ with tab2: # 감정분석 통계
 with tab3: # 1인가구 집단 통계
     st.cache_data.clear()
     st.cache_resource.clear()
-    st.text('아래의 각 박스를 눌러 선택해주세요.')
     t3_col1_1, t3_col1_2, t3_col1_3, t3_col1_4 = st.columns([0.2,0.2,0.2,0.2], gap = columns_gap) # 조회할 값 선택
     with t3_col1_1:
         st.subheader('**관심 집단 선택**')

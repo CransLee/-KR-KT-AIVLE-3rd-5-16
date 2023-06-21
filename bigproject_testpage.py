@@ -401,12 +401,12 @@ with tab1: # IoT 통계
         st.subheader('현재 상태')
         st.text('- 대상자 시리얼 번호 : ' +  t1_Serial_Num)
         st.text('- 대상자 분류 : ' + t1_Target_Type + ' => ' + str(t1_Target_Alert_Time) + '시간 적용 대상')
-    st.table(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Electro'])
-    st.text(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Electro'].value_counts())
+    # st.table(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Electro'])
+    # st.text(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Electro'].value_counts())
     with t1_col1_3:
         t1_col1A_1, t1_col1A_2 = st.columns([0.5, 0.5], gap = columns_gap)
         with t1_col1A_1:
-            if t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Electro'].value_counts() == 0:
+            if len(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Electro']) == 0:
                 st.image(Image.open('./Data/Asset/Electro_Gray.jpg'), caption='찾을 수 없음')
             elif Electro_Status == True:
                 st.image(Image.open('./Data/Asset/Electro_Red.jpg'), caption= Electro_Time + ' 시간 이상 변화없음')
@@ -415,7 +415,7 @@ with tab1: # IoT 통계
             else:
                 st.image(Image.open('./Data/Asset/Electro_Green.jpg'), caption= '정상 작동 중')
         with t1_col1A_2:
-            if t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Light'].value_counts() == 0:
+            if len(t1_Temp_IoT_Sensor_Chosen_Dataset.loc[t1_Temp_IoT_Sensor_Chosen_Dataset['Sensor_Type'] == 'Light']) == 0:
                 st.image(Image.open('./Data/Asset/Light_Gray.jpg'), caption='찾을 수 없음')
             elif Electro_Status == True:
                 st.image(Image.open('./Data/Asset/Light_Red.jpg'), caption= Electro_Time + ' 시간 이상 변화없음')

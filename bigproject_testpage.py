@@ -412,19 +412,19 @@ with tab1: # IoT 통계
     st.subheader('')
     t1_col2_1, t1_col2_2= st.columns([0.5, 0.5])
     with t1_col2_1:
-        st.subheader('최근 50시간 기준 전력량(Wh) 그래프')
+        st.header('전력센서 통계)
+        st.text('최근 50시간 기준 전력량(Wh) 그래프')
         st.line_chart(data = IoT_Stat_Dataset.loc[IoT_Stat_Dataset['시리얼'] == t1_Serial_Num], x = '등록일시', y = '전력량1 (Wh)')
-    with t1_col2_2:
-        st.subheader('최근 50시간 기준 조도(%) 그래프')
-        st.line_chart(data = IoT_Stat_Dataset.loc[IoT_Stat_Dataset['시리얼'] == t1_Serial_Num], x = '등록일시', y = '조도1 (%)')
-        
-    t1_col3_1, t1_col3_2 = st.columns([0.5, 0.5])
-    with t1_col3_1:
-        st.subheader('최근 7일 전력소비량(Wh) 총량의 일평균 값 그래프')
+        st.text('최근 7일 전력소비량(Wh) 총량의 일평균 값 그래프')
         st.line_chart(data = IoT_Stat_Dataset_Search_Result_2, x = '등록일시', y = '전력량1 (Wh) 일 평균')
-    with t1_col3_2:
-        st.subheader('최근 7일 조도(%)의 일평균 값 그래프')
+            
+    with t1_col2_2:
+        st.header('조도센서 통계)
+        st.text('최근 50시간 기준 조도(%) 그래프')
+        st.line_chart(data = IoT_Stat_Dataset.loc[IoT_Stat_Dataset['시리얼'] == t1_Serial_Num], x = '등록일시', y = '조도1 (%)')
+        st.text('최근 7일 조도(%)의 일평균 값 그래프')
         st.line_chart(data = IoT_Stat_Dataset_Search_Result_2, x = '등록일시', y = '조도1 (%) 일 평균')
+
         
     st.subheader('센서 통계 데이터 상세보기 : ' + t1_Serial_Num)
     t1_col4_1, t1_col4_2, t1_col4_3 = st.columns([0.33, 0.34, 0.33])
@@ -650,7 +650,6 @@ with tab4: # 대상자 정보 및 수정
         st.table(Info_Change_Reason_Dataset.loc[Info_Change_Reason_Dataset['Name'] == tab4_selectbox_1].sort_values('Time', ascending=False).head(5))
     st.subheader("")
     with st.expander("IoT 센서 상세보기 및 고장접수"):
-        st.text(Person_Dataset.loc[tab4_Dataset_Index,'IoT_Serial_Num'])
         Temp_IoT_Sensor_Chosen_Dataset = IoT_Sensor_Info_Dataset.loc[IoT_Sensor_Info_Dataset['IoT_Serial_Num'] == Person_Dataset.loc[tab4_Dataset_Index,'IoT_Serial_Num']].sort_values('Sensor_Type', ascending=True)
         st.table(Temp_IoT_Sensor_Chosen_Dataset)
         st.caption('IoT_Sensor_Num: 1인가구 개개인에게 부여된 식별코드 / Sensor_Type: 센서 종류, 전력(Electro) 또는 조도(Light) / Sensor_Count: 센서 종류 별 등록순서 / Sensor_Num: 해당 센서의 식별코드')

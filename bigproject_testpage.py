@@ -559,8 +559,8 @@ with tab2: # 감정분석 통계
     t2_col3_1, t2_col3_2, t2_col3_3 = st.columns([0.3, 0.3, 0.3], gap = columns_gap)
     with t2_col3_1:
         st.subheader('시간대별 부정 횟수 집계 그래프')
-        st.text('최근 시간대 집계 횟수 : ' + str(Emotion_Stat_Dataset_Search_Result_1.sort_values('Start_Time', ascending = False).reset_index(drop=True).loc[0, 'Negative_Count']) + '회')
-        st.line_chart(data = Emotion_Stat_Dataset_Search_Result_1.tail(8), x = 'Start_Time', y = 'Negative_Count')
+        st.text('최근 시간대 집계 횟수 : ' + str(Emotion_Stat_Dataset_Search_Result_1.sort_values('End_Time', ascending = False).reset_index(drop=True).loc[0, 'Negative_Count']) + '회')
+        st.line_chart(data = Emotion_Stat_Dataset_Search_Result_1.tail(8), x = 'End_Time', y = 'Negative_Count')
         
     with t2_col3_2:
         st.subheader('일별 총 부정 횟수 집계 그래프')

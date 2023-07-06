@@ -503,8 +503,8 @@ with tab2: # 감정분석 통계
         Emotion_Stat_Dataset_Search_Result_4['Week'] = pd.to_datetime(Emotion_Stat_Dataset_Search_Result_4['Datetime']).map(lambda x: x.isocalendar()[1])
         Emotion_Stat_Dataset_Search_Result_4 = Emotion_Stat_Dataset_Search_Result_4.groupby(['Week'], as_index=False)[['Negative_Count']].sum()
 
-        Emotion_Stat_Dataset_Search_Result_5 = Emotion_Stat_Dataset_Search_Result_2.sort_values('Datetime', ascending=True)
-        st.table(Emotion_Stat_Dataset_Search_Result_5.head(5))
+        Emotion_Stat_Dataset_Search_Result_5 = Emotion_Stat_Dataset_Search_Result_2.sort_values('Datetime', ascending=False).head(7)
+        st.table(Emotion_Stat_Dataset_Search_Result_5)
         
     
     t2_Serial_Num = Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab2_selectbox].index, 'IoT_Serial_Num'].reset_index(drop=True)[0]

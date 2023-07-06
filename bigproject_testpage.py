@@ -505,13 +505,13 @@ with tab2: # 감정분석 통계
 
         Emotion_Stat_Dataset_Search_Result_5 = Emotion_Stat_Dataset_Search_Result_2.sort_values('Datetime', ascending=False).head(7)
         Last_Week_Negative_Count = Emotion_Stat_Dataset_Search_Result_5['Negative_Count'].sum()
-        st.table(Emotion_Stat_Dataset_Search_Result_5)
-        st.text(Last_Week_Negative_Count)
+        # st.table(Emotion_Stat_Dataset_Search_Result_5)
+        # st.text(Last_Week_Negative_Count)
         
     
     t2_Serial_Num = Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab2_selectbox].index, 'IoT_Serial_Num'].reset_index(drop=True)[0]
     t2_Target_Type = Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab2_selectbox].index, 'Emotion_Type'].reset_index(drop=True)[0]
-    Last_Week_Negative_Count = Emotion_Stat_Dataset_Search_Result_4.sort_values('Week', ascending = False).reset_index(drop=True).loc[0, 'Negative_Count']
+    # Last_Week_Negative_Count = Emotion_Stat_Dataset_Search_Result_4.sort_values('Week', ascending = False).reset_index(drop=True).loc[0, 'Negative_Count']
     
     if Last_Week_Negative_Count < 100 and Last_Week_Negative_Count != '정상(안정)':
         Person_Dataset.loc[Person_Dataset.loc[Person_Dataset['Name'] == tab2_selectbox].index, 'Emotion_Type'] = '정상(안정)'

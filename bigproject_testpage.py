@@ -503,7 +503,7 @@ with tab2: # 감정분석 통계
         Emotion_Stat_Dataset_Search_Result_4['Week'] = pd.to_datetime(Emotion_Stat_Dataset_Search_Result_4['Datetime']).map(lambda x: x.isocalendar()[1])
         Emotion_Stat_Dataset_Search_Result_4 = Emotion_Stat_Dataset_Search_Result_4.groupby(['Week'], as_index=False)[['Negative_Count']].sum()
 
-        Emotion_Stat_Dataset_Search_Result_5 = Emotion_Stat_Dataset_Search_Result_4
+        Emotion_Stat_Dataset_Search_Result_5 = Emotion_Stat_Dataset_Search_Result_2
         st.table(Emotion_Stat_Dataset_Search_Result_5.head(5))
         
     
